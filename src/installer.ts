@@ -1,17 +1,53 @@
 /**
  * J-Space preset installer and lifecycle utilities.
- * @module @deepseek-ai/dsh-plugin-j-space/installer
+ * @module dsh-plugin-j-space/installer
  */
 
 import { cp, mkdir, rm, stat } from 'node:fs/promises'
-import { dirname, join } from 'node:path'
+import { homedir } from 'node:os'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { dshHomePath } from '@deepseek-ai/dsh-home-paths'
 
+/** Directory name for the default DeepSeek Harness home under the OS home. */
+export const DSH_HOME_DIR_NAME = '.dsh'
+/** Environment variable that overrides the default DeepSeek Harness home. */
+export const DSH_HOME_ENV = 'DSH_HOME'
 /** Subdirectory under DSH home where user-authored presets live. */
 export const USER_PRESET_DIR = '.agent-presets'
 /** The preset id for J-Space Cognition Suite. */
 export const PRESET_ID = 'j-space'
+
+/**
+ * Expand supported tilde prefixes against the operating-system home.
+ * @param path - path starting with ~
+ * @returns expanded absolute path
+ */
+export function expandHomePath(path: string): string {
+  if (path === '~') return homedir()
+  if (path.startsWith('~/') || path.startsWith('~\\')) return join(homedir(), path.slice(2))
+  return path
+}
+
+/**
+ * Resolve the single-root DeepSeek Harness home directory.
+ * @param configured - explicit harness-home override
+ * @param env - environment variable map
+ * @returns resolved absolute DSH home directory path
+ */
+export function resolveDshHome(configured?: string, env: Record<string, string | undefined> = process.env): string {
+  const fromEnv = env[DSH_HOME_ENV]
+  const selected = configured ?? (fromEnv !== undefined && fromEnv.trim().length > 0 ? fromEnv : join(homedir(), DSH_HOME_DIR_NAME))
+  return resolve(expandHomePath(selected))
+}
+
+/**
+ * Join path segments onto the resolved DeepSeek Harness home.
+ * @param segments - path segments to append
+ * @returns normalized absolute joined path
+ */
+export function dshHomePath(...segments: string[]): string {
+  return join(resolveDshHome(), ...segments)
+}
 
 /**
  * Resolve the directory holding the bundled J-Space preset template.
@@ -28,7 +64,7 @@ export function getJSpaceTemplatePath(): string {
  */
 export function targetUserPresetDir(dshHome?: string): string {
   if (dshHome !== undefined && dshHome !== '') {
-    return join(dshHome, USER_PRESET_DIR, PRESET_ID)
+    return join(resolveDshHome(dshHome), USER_PRESET_DIR, PRESET_ID)
   }
   return join(dshHomePath(USER_PRESET_DIR), PRESET_ID)
 }

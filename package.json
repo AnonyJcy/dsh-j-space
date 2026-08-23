@@ -5,10 +5,10 @@
   "author": "DeepSeek AI",
   "license": "MIT",
   "type": "module",
-  "main": "lib/index.js",
-  "types": "lib/types/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "bin": {
-    "dsh-j-space": "src/bin/cli.ts"
+    "dsh-j-space": "bin/cli.js"
   },
   "exports": {
     ".": {
@@ -23,8 +23,10 @@
   },
   "files": [
     "src",
+    "bin",
     "preset",
     "README.md",
+    "README.en.md",
     "LICENSE"
   ],
   "keywords": [
@@ -37,9 +39,6 @@
     "reasoning",
     "cordis-plugin"
   ],
-  "dependencies": {
-    "@deepseek-ai/dsh-home-paths": "^0.1.0"
-  },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=3.0.0"
   },
@@ -50,9 +49,9 @@
   },
   "scripts": {
     "test": "vitest run",
-    "status": "node --import tsx/esm src/bin/cli.ts status",
-    "install:preset": "node --import tsx/esm src/bin/cli.ts install",
-    "uninstall:preset": "node --import tsx/esm src/bin/cli.ts uninstall",
-    "verify": "node --import tsx/esm src/bin/cli.ts verify"
+    "status": "node bin/cli.js status",
+    "install:preset": "node bin/cli.js install",
+    "uninstall:preset": "node bin/cli.js uninstall",
+    "verify": "node bin/cli.js verify"
   }
 }
