@@ -1,0 +1,58 @@
+{
+  "name": "@deepseek-ai/dsh-plugin-j-space",
+  "version": "0.1.0",
+  "description": "J-Space Cognition Suite V3.7 native Agent Preset and standalone plugin for DeepSeek Harness",
+  "author": "DeepSeek AI",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "bin": {
+    "dsh-j-space": "src/bin/cli.ts"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./installer": {
+      "types": "./src/installer.ts",
+      "default": "./src/installer.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "preset",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "j-space",
+    "agent",
+    "preset",
+    "cognition",
+    "reasoning",
+    "cordis-plugin"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-home-paths": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^3.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "status": "node --import tsx/esm src/bin/cli.ts status",
+    "install:preset": "node --import tsx/esm src/bin/cli.ts install",
+    "uninstall:preset": "node --import tsx/esm src/bin/cli.ts uninstall",
+    "verify": "node --import tsx/esm src/bin/cli.ts verify"
+  }
+}
