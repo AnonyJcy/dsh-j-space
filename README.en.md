@@ -17,31 +17,53 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ## 📊 Empirical Capability Realization Report
 
-> See the full test report by the author: [DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
+> Full test report by the author: [DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
 
 ### 🔬 Methodology & Setup
 - **Base Model**: `DeepSeek-V4-Flash-Vision-Exp`
 - **Harness**: DeepSeek Harness (Standard Mode)
-- **Methodology**: Rigorous **A/B Testing** with and without J-Space under identical model, environment, and sampling parameters.
-- **Evaluation Dimensions**:
-  1. **Accuracy / Pass Rate**: Success rate across complex SWE, multi-step terminal tasks, and domain reasoning.
-  2. **Wall-Clock & Efficiency**: Path conciseness and reasoning convergence speed.
+- **Methodology**: Rigorous **A/B Testing** with and without J-Space on authoritative benchmark subsets and same-type mini-sets (Terminal-Bench 2.1: 20 medium / 10 hard; DeepSWE: 10 TypeScript / 10 Python / 10 Go / 2 JavaScript / 2 Rust; GAIA: level 1 / level 3, etc.), with identical model, environment, and sampling — only the J-Space toggle differs.
+- **Evaluation Dimensions**: ① Accuracy / Pass Rate; ② Wall-clock & Token Efficiency.
 
-### 📈 Benchmark Comparison
+---
 
-| Benchmark | DeepSeek V4 (Baseline) | DeepSeek V4 **+ J-Space V3.7** | Improvement / Observations |
-| :--- | :---: | :---: | :--- |
-| **HLE (Humanity's Last Exam - w/o tools)** | 37.8% | **37.8%** | Preserves high native baseline reasoning |
-| **HLE (Humanity's Last Exam - w/ tools)** | 51.5% | **51.9%** | Improved tool orchestration and problem modeling |
-| **Terminal-Bench 2.1 (Medium 20 / Hard 10)** | 83.9% | **Enhanced** | Reduced mid-task stalling, solid state maintenance |
-| **DeepSWE (TS 10 / Py 10 / Go 10 / Rust 2)** | Baseline | **Substantial Gain** | Precise code localization, eliminated loop hallucinations |
-| **GAIA (Level 1 / Level 3)** | Baseline | **Multi-step Boost** | Faster convergence on long-horizon reasoning tracks |
+### 1. Main Benchmark Table (Accuracy Comparison)
+
+| Benchmark | DeepSeek V4-Flash (Baseline) | DeepSeek V4-Flash **+ J-Space V3.7** | GLM-5.3 | Kimi-K3 | Opus-4.8 | Fable 5 (w/ fallback) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/o tools)** | *37.8 | **37.8** | — | 43.5 | 49.8 | 53.3 |
+| **HLE (w/ tools)** | *51.5 | **51.9** | 62.5 | 56.0 | 57.9 | 63.0 |
+| **Terminal Bench 2.1** | 83.9 | **85.5** | 88.2 | 88.3 | 85.0 | 88.0 |
+| **NL2Repo** | 57.7 | **60.4** | 58.0 | 58.0 | 69.7 | — |
+| **CyberGym** | 75.3 | **77.8** | 84.5 | 80.0 | 78.3 | 83.1 |
+| **DeepSWE** | 59.3 | **61.8** | 66.9 | 67.5 | 58.0 | 70.0 |
+| **Toolathlon-Verified** | 75.9 | **77.4** | 73.0 | 76.5 | 76.2 | 77.9 |
+| **Agents' Last Exam** | 27.3 | **28.3** | 28.5 | 27.6 | 25.7 | 23.8 |
+| **AutomationBench (Public)** | 25.7 | **27.6** | 48.2 | 30.8 | 27.2 | 29.1 |
+| **⭐ Average Score** | 56.99 | **58.61** | 64.54 | 60.96 | 58.33 | 62.13 |
+
+*\* Note: HLE scores were not disclosed and follow DeepSeek V4-Flash-0731. The average covers the 7 rows where all six columns have values.*
+
+---
+
+### 2. Speed and Token Efficiency Table
+
+| Benchmark | Wall-clock τ | Speedup | Output Tokens | Total Tokens | **Score per Unit Time** | Cost per Successful Task |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/o tools)** | *1.02 | −2% | −10% | +5% | **0.98×** | +5% |
+| **HLE (w/ tools)** | 0.88 | **+14%** | −22% | +3% | **1.15×** | +2% |
+| **Terminal Bench 2.1** | 0.79 | **+27%** | −28% | −3% | **1.29×** | **−5%** |
+| **DeepSWE** | 0.78 | **+28%** | −28% | −3% | **1.34×** | **−7%** |
+| **Toolathlon-Verified** | 0.86 | **+16%** | −25% | +2% | **1.19×** | +0% |
+| **AutomationBench (Public)** | 0.76 | **+32%** | −31% | −5% | **1.41×** | **−12%** |
+
+*\* Note: For HLE (w/o tools), τ=1.02 is **intentionally positive** (i.e. slower) because on single-turn tasks without tools, injecting the full skill entry is net overhead. On long-horizon and multi-turn coding/agentic benchmarks (e.g. Terminal Bench, DeepSWE, AutomationBench), J-Space delivers **+14% ~ +32% faster execution**, **cuts 28%~31% of output token redundancy**, and boosts score per unit time by **1.15× ~ 1.41×**.*
 
 ---
 
 ## 🚀 Installation & Deployment
 
-### Method 1: Install from npm / pnpm
+### Method 1: Install from npm / pnpm (Official Registry)
 
 ```bash
 # via npm

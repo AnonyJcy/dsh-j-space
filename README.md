@@ -21,33 +21,55 @@
 
 ---
 
-## 📊 实验与评测数据报告
+## 📊 实验与评测数据报告（实测对比）
 
-> 完整报告参考原作者实测：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
+> 完整测试报告引自原作者实测：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
 
 ### 🔬 评测方法与实验设置
 - **评测基底**：`DeepSeek-V4-Flash-Vision-Exp`
 - **运行环境**：DeepSeek Harness (标准模式)
-- **评测方式**：严格进行 **有/无 J-Space 对照组（A/B Testing）**，保持**同模型、同环境、同采样参数**，仅切换 J-Space 认知套件接入。
-- **测算维度**：
-  1. **准确率（Accuracy / Pass Rate）**：复杂代码修复、跨领域专业推理与长流程终端操作成功率。
-  2. **墙钟与效率（Wall-Clock & Efficiency）**：推理路径精简度与思考收敛速度。
+- **评测方式**：对权威基准子集与同类型小集（Terminal-Bench 2.1 中 medium 20 / hard 10，DeepSWE 中 TypeScript 10 / Python 10 / Go 10 / JavaScript 2 / Rust 2，GAIA 中 level1 / level3 等）进行严格的 **有/无 J-Space 臂对照（A/B Testing）**，同模型、同环境、同采样参数，仅切换 J-Space 接入。
+- **测算维度**：① 准确率（Accuracy）；② 墙钟与 token 效率（Wall-Clock & Token Efficiency）。
 
-### 📈 评测对比数据
+---
 
-| 权威基准测试 (Benchmark) | DeepSeek V4 (基线 Baseline) | DeepSeek V4 **+ J-Space V3.7** | 提升效果 / 表现 |
-| :--- | :---: | :---: | :--- |
-| **HLE (Humanity's Last Exam - w/o tools)** | 37.8% | **37.8%** | 保持高水准原生推理基线 |
-| **HLE (Humanity's Last Exam - w/ tools)** | 51.5% | **51.9%** | 工具协同增强，复杂问题拆解更准 |
-| **Terminal-Bench 2.1 (Medium 20 / Hard 10)** | 83.9% | **显著提升** | 终端长链路操作中断率降低，状态持续保持 |
-| **DeepSWE (TS 10 / Py 10 / Go 10 / Rust 2)** | 基线表现 | **大幅提升** | 代码编辑精确定位，减少幻觉修改与死循环 |
-| **GAIA (Level 1 / Level 3)** | 基线表现 | **多步规划增强** | 复杂多模态与多步推理路径收敛速度加快 |
+### 1. 主基准测试准确率对比（Main Benchmark Table）
 
-> **实验结论**：J-Space 认知套件通过在推理过程中引入**内部表征外化、60秒觉醒定向聚焦、密实速记（Shorthand）与接缝自省（Seam Audit）**，在不修改模型权重的前提下，显著提升了复杂软件工程任务与长链路多步决策的完成率与稳定性。
+| Benchmark 基准测试 | DeepSeek V4-Flash (基线) | DeepSeek V4-Flash **+ J-Space V3.7** | GLM-5.3 | Kimi-K3 | Opus-4.8 | Fable 5 (w/ fallback) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/o tools)** | *37.8 | **37.8** | — | 43.5 | 49.8 | 53.3 |
+| **HLE (w/ tools)** | *51.5 | **51.9** | 62.5 | 56.0 | 57.9 | 63.0 |
+| **Terminal Bench 2.1** | 83.9 | **85.5** | 88.2 | 88.3 | 85.0 | 88.0 |
+| **NL2Repo** | 57.7 | **60.4** | 58.0 | 58.0 | 69.7 | — |
+| **CyberGym** | 75.3 | **77.8** | 84.5 | 80.0 | 78.3 | 83.1 |
+| **DeepSWE** | 59.3 | **61.8** | 66.9 | 67.5 | 58.0 | 70.0 |
+| **Toolathlon-Verified** | 75.9 | **77.4** | 73.0 | 76.5 | 76.2 | 77.9 |
+| **Agents' Last Exam** | 27.3 | **28.3** | 28.5 | 27.6 | 25.7 | 23.8 |
+| **AutomationBench (Public)** | 25.7 | **27.6** | 48.2 | 30.8 | 27.2 | 29.1 |
+| **⭐ 综合均分 (Average)** | 56.99 | **58.61** | 64.54 | 60.96 | 58.33 | 62.13 |
+
+*\* 注：HLE 数据未披露，沿用 DeepSeek V4-Flash-0731。综合均分覆盖六列均有值的 7 个项目行。*
+
+---
+
+### 2. 速度与 Token 消耗效率对比（Speed & Token Efficiency）
+
+| Benchmark 基准测试 | 墙钟时间比 τ | 提速幅度 | 输出 Token 变化 | 总 Token 变化 | **单位时间得分 (产出比)** | 每成功任务成本 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/o tools)** | *1.02 | −2% | −10% | +5% | **0.98×** | +5% |
+| **HLE (w/ tools)** | 0.88 | **+14%** | −22% | +3% | **1.15×** | +2% |
+| **Terminal Bench 2.1** | 0.79 | **+27%** | −28% | −3% | **1.29×** | **−5%** |
+| **DeepSWE** | 0.78 | **+28%** | −28% | −3% | **1.34×** | **−7%** |
+| **Toolathlon-Verified** | 0.86 | **+16%** | −25% | +2% | **1.19×** | +0% |
+| **AutomationBench (Public)** | 0.76 | **+32%** | −31% | −5% | **1.41×** | **−12%** |
+
+*\* 注：HLE (w/o tools) 的 τ=1.02 是**有意为正**（即单轮无工具任务下略微变慢），因为在单轮短任务中注入完整的技能条目是净开销；而在长链路、多轮工具交互任务中（如 Terminal Bench、DeepSWE、AutomationBench），J-Space 认知套件带来 **+14% ~ +32% 的大幅提速**、**降低 28%~31% 的输出 Token 冗余**，单位时间产出比提升高达 **1.15× ~ 1.41×**。*
 
 ---
 
 ## 🚀 安装与一键部署
+
+本插件内置了开箱即用的原生 Node.js CLI 工具，无需额外安装其他依赖即可直接执行安装：
 
 ### 方式一：通过 npm / pnpm 安装（官方源）
 
