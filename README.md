@@ -49,9 +49,20 @@
 
 ## 🚀 安装与一键部署
 
-本插件内置了开箱即用的原生 Node.js CLI 工具，无需额外安装其他依赖即可直接执行安装：
+### 方式一：通过 npm / pnpm 安装（官方源）
 
-### 方式一：克隆仓库直接安装（推荐本地使用）
+```bash
+# npm 安装
+npm install -D @anonyjcy/dsh-plugin-j-space
+
+# pnpm 安装
+pnpm add -D @anonyjcy/dsh-plugin-j-space
+
+# 运行 CLI 一键部署预设
+npx @anonyjcy/dsh-plugin-j-space install
+```
+
+### 方式二：克隆仓库直接安装（本地使用）
 
 ```bash
 git clone https://github.com/AnonyJcy/dsh-plugin-j-space.git
@@ -62,16 +73,6 @@ node bin/cli.js install
 
 # 检查安装状态与完整性
 node bin/cli.js status
-```
-
-### 方式二：通过 Git / npm 安装到你的 DSH 项目
-
-```bash
-# 在 DeepSeek Harness 项目根目录中添加依赖
-pnpm add -D github:AnonyJcy/dsh-plugin-j-space
-
-# 运行 CLI 部署
-npx dsh-j-space install
 ```
 
 ---
@@ -91,7 +92,7 @@ dsh --preset j-space "全面重构此模块并补充单元测试"
 ### 3. Cordis 配置文件组装 (`cordis.yml`)
 ```yaml
 - id: j-space-plugin
-  name: '@deepseek-ai/dsh-plugin-j-space'
+  name: '@anonyjcy/dsh-plugin-j-space'
   config:
     autoDeploy: true
 ```

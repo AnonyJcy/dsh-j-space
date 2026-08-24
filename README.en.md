@@ -41,7 +41,20 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ## 🚀 Installation & Deployment
 
-### Method 1: Direct Clone & Install (Recommended for Local Use)
+### Method 1: Install from npm / pnpm
+
+```bash
+# via npm
+npm install -D @anonyjcy/dsh-plugin-j-space
+
+# via pnpm
+pnpm add -D @anonyjcy/dsh-plugin-j-space
+
+# Deploy preset to ~/.dsh/.agent-presets/j-space
+npx @anonyjcy/dsh-plugin-j-space install
+```
+
+### Method 2: Direct Clone & Install (Local Use)
 ```bash
 git clone https://github.com/AnonyJcy/dsh-plugin-j-space.git
 cd dsh-plugin-j-space
@@ -51,15 +64,6 @@ node bin/cli.js install
 
 # Check status
 node bin/cli.js status
-```
-
-### Method 2: Install via Git / Package Manager
-```bash
-# In your DeepSeek Harness workspace
-pnpm add -D github:AnonyJcy/dsh-plugin-j-space
-
-# Deploy via CLI
-npx dsh-j-space install
 ```
 
 ---
@@ -79,7 +83,7 @@ dsh --preset j-space "Analyze this architecture and implement feature X"
 ### 3. In Cordis Composition (`cordis.yml`)
 ```yaml
 - id: j-space-plugin
-  name: '@deepseek-ai/dsh-plugin-j-space'
+  name: '@anonyjcy/dsh-plugin-j-space'
   config:
     autoDeploy: true
 ```

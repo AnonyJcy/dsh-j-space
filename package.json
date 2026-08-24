@@ -1,8 +1,8 @@
 {
-  "name": "@deepseek-ai/dsh-plugin-j-space",
-  "version": "0.1.0",
+  "name": "@anonyjcy/dsh-plugin-j-space",
+  "version": "1.0.0",
   "description": "J-Space Cognition Suite V3.7 native Agent Preset and standalone plugin for DeepSeek Harness",
-  "author": "DeepSeek AI",
+  "author": "anonyjcy",
   "license": "MIT",
   "type": "module",
   "main": "src/index.ts",
@@ -10,6 +10,17 @@
   "bin": {
     "dsh-j-space": "bin/cli.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnonyJcy/dsh-plugin-j-space.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnonyJcy/dsh-plugin-j-space/issues"
+  },
+  "homepage": "https://github.com/AnonyJcy/dsh-plugin-j-space#readme",
   "exports": {
     ".": {
       "types": "./src/index.ts",
