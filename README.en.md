@@ -15,6 +15,14 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ---
 
+## 📸 Screenshots & Preview
+
+| DSH Preset Selection (Zero-Config) | J-Space Cognition Session in Action |
+| :---: | :---: |
+| ![DSH Preset Selection](assets/preset-selection.png) | ![J-Space Runtime Session](assets/runtime-session.png) |
+
+---
+
 ## 📊 Empirical Capability Realization Report
 
 > Full test report by the author: [DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)

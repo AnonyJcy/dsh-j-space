@@ -21,6 +21,14 @@
 
 ---
 
+## 📸 运行与效果预览
+
+| DSH 预设选择（即插即用） | J-Space 认知工作流实况 |
+| :---: | :---: |
+| ![DSH Preset Selection](assets/preset-selection.png) | ![J-Space Runtime Session](assets/runtime-session.png) |
+
+---
+
 ## 📊 实验与评测数据报告（实测对比）
 
 > 完整测试报告引自原作者实测：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
