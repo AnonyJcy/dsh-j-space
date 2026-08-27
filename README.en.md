@@ -1,5 +1,9 @@
 # dsh-plugin-j-space
 
+[![DSH Market Listed](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-plugin-j-space)
+[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-plugin-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-plugin-j-space)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 [简体中文](README.md) | **English**
 
 > **J-Space Cognition Suite V3.7** native Agent Preset & standalone Cordis plugin for **DeepSeek Harness (DSH)**.  

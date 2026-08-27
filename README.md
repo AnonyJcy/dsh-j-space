@@ -1,5 +1,9 @@
 # 🚀 dsh-plugin-j-space
 
+[![DSH Market 收录徽章](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-plugin-j-space)
+[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-plugin-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-plugin-j-space)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 **简体中文** | [English Version](README.en.md)
 
 > **J-Space Cognition Suite V3.7** 原生 DeepSeek Harness (DSH) Agent Preset 预设与独立 Cordis 插件包。  
