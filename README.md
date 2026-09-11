@@ -11,7 +11,7 @@
 
 ---
 
-> 兼容：已适配 DSH 0.1.5 的  schema（ / ）。
+> 兼容：已适配 DSH 0.1.5 的 `dsh-persona` schema（`config.prefix` / `config.suffix`）。
 
 ## 🌟 项目简介
 

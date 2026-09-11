@@ -11,7 +11,7 @@
 
 ---
 
-> Compatibility: adapted to DSH 0.1.5  schema ( / ).
+> Compatibility: adapted to DSH 0.1.5 `dsh-persona` schema (`config.prefix` / `config.suffix`).
 
 ## 🌟 Overview
 
