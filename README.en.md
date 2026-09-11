@@ -159,3 +159,7 @@ node bin/cli.js status     # Display current installation status
 ## 📄 License
 
 MIT License. See [LICENSE](./LICENSE) and [THIRD_PARTY_NOTICES.md](./preset/skills/j-space/THIRD_PARTY_NOTICES.md).
+
+## Maintenance
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes.

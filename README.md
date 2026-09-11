@@ -168,3 +168,7 @@ node bin/cli.js status     # 查看当前安装状态与配置路径
 ## 📄 开源许可证
 
 本项目基于 [MIT License](./LICENSE) 开源。套件第三方声明见 [THIRD_PARTY_NOTICES.md](./preset/skills/j-space/THIRD_PARTY_NOTICES.md)。
+
+## 维护 / Maintenance
+
+版本变更见 [CHANGELOG.md](CHANGELOG.md)。
