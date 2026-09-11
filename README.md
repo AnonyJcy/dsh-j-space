@@ -11,6 +11,8 @@
 
 ---
 
+> 兼容：已适配 DSH 0.1.5 的  schema（ / ）。
+
 ## 🌟 项目简介
 
 `dsh-plugin-j-space` 将 [J-Space Cognition Suite V3.7](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.7) 完整集成为 DeepSeek Harness 的一等公民 **Agent 预设 (Preset)**。

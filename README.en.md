@@ -11,6 +11,8 @@
 
 ---
 
+> Compatibility: adapted to DSH 0.1.5  schema ( / ).
+
 ## 🌟 Overview
 
 `dsh-plugin-j-space` integrates the [J-Space Cognition Suite V3.7](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.7) into DeepSeek Harness as a native **Agent Preset**.
