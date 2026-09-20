@@ -1,32 +1,16 @@
 # Changelog
 
-## 1.0.2 — 2026-09-12
+## 1.0.3 — 2026-09-20
 
 ### Fixed
-- Adapt `preset/agent.cordis.yml` persona config to DSH **0.1.5** `dsh-persona` schema:
-  - replaced invalid `config.text` with required `config.prefix` and optional `config.suffix`
-  - without this, preset mount fails with `$.prefix missing required value`
+- Use  (, ) in 
+- DSH **0.1.6** removed ; j-space failed to mount with 
 
-### Synced
-- Refreshed embedded J-Space skills from upstream
-  [`Tiger3807861189/J-Space-Cognition-Suite-V3.7`](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.7)
-  @ `988d07b8` (`v3.7.4` line):
-  - `SKILL.md`
-  - `modules/capacity.md`
-  - `modules/deep-reasoning.md`
-  - `modules/shorthand.md`
-  - `references/j-space-science.md`
-  - `scripts/jspace.py`
-  - `scripts/workspace-ledger.md`
-- Verified plugin `preset/skills/j-space` matches upstream 17/17 files
+### Compatibility
+- Target host: DSH **0.1.6-alpha.2+** (workflow stack rename)
+- 0.1.5 still had worker-thread; this package now matches 0.1.6 shipped presets
 
-### Docs
-- README notes DSH 0.1.5 compatibility
-- This changelog
+## 1.0.2 — 2026-09-12
+- DSH 0.1.5  schema (/)
+- Synced skills from upstream V3.7 @ 
 
-### Publish
-- npm: `@anonyjcy/dsh-plugin-j-space@1.0.2` (`latest`)
-- git: `main` @ `c210723` (and related docs/prefix commits)
-
-## 1.0.1
-- Prior npm/GitHub release before DSH 0.1.5 adaptation.
