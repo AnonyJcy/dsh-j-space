@@ -1,5 +1,5 @@
 {
-  "name": "@anonyjcy/dsh-plugin-j-space",
+  "name": "@anonyjcy/dsh-j-space",
   "version": "1.1.0",
   "description": "J-Space Cognition Suite SV1 native Agent Preset and standalone plugin for DeepSeek Harness",
   "author": "anonyjcy",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnonyJcy/dsh-plugin-j-space.git"
+    "url": "git+https://github.com/AnonyJcy/dsh-j-space.git"
   },
   "bugs": {
-    "url": "https://github.com/AnonyJcy/dsh-plugin-j-space/issues"
+    "url": "https://github.com/AnonyJcy/dsh-j-space/issues"
   },
-  "homepage": "https://github.com/AnonyJcy/dsh-plugin-j-space#readme",
+  "homepage": "https://github.com/AnonyJcy/dsh-j-space#readme",
   "exports": {
     ".": {
       "types": "./src/index.ts",

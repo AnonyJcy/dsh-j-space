@@ -1,6 +1,6 @@
 /**
  * Standalone plugin for DeepSeek Harness that integrates J-Space Cognition Suite SV1 as an Agent Preset.
- * @module @deepseek-ai/dsh-plugin-j-space
+ * @module @anonyjcy/dsh-j-space
  */
 
 import type { Context } from '@deepseek-ai/cordis'

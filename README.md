@@ -1,7 +1,7 @@
-# 🚀 dsh-plugin-j-space
+# 🚀 dsh-j-space
 
-[![DSH Market 收录徽章](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-plugin-j-space)
-[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-plugin-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-plugin-j-space)
+[![DSH Market 收录徽章](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-j-space)
+[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-j-space)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 **简体中文** | [English Version](README.en.md)
@@ -15,7 +15,7 @@
 
 ## 🌟 项目简介
 
-`dsh-plugin-j-space` 将 [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite)（SV1 发布版，延续 V3.7 演进路线）完整集成为 DeepSeek Harness 的一等公民 **Agent 预设 (Preset)**。
+`dsh-j-space` 将 [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite)（SV1 发布版，延续 V3.7 演进路线）完整集成为 DeepSeek Harness 的一等公民 **Agent 预设 (Preset)**。
 
 它不是粗暴的 Prompt 拼接，而是真正参与 Cordis **Agent Scope 生命周期隔离、多层认知路由、持久控制器、工作区状态外化账本（`.jspace/`）与自适应验证** 的完整体系，完全解耦并兼容任意大语言模型（DeepSeek-Chat、DeepSeek-Reasoner、Claude、GPT 等）。
 
@@ -113,20 +113,20 @@
 
 ```bash
 # npm 安装
-npm install -D @anonyjcy/dsh-plugin-j-space
+npm install -D @anonyjcy/dsh-j-space
 
 # pnpm 安装
-pnpm add -D @anonyjcy/dsh-plugin-j-space
+pnpm add -D @anonyjcy/dsh-j-space
 
 # 运行 CLI 一键部署预设
-npx @anonyjcy/dsh-plugin-j-space install
+npx @anonyjcy/dsh-j-space install
 ```
 
 ### 方式二：克隆仓库直接安装（本地使用）
 
 ```bash
-git clone https://github.com/AnonyJcy/dsh-plugin-j-space.git
-cd dsh-plugin-j-space
+git clone https://github.com/AnonyJcy/dsh-j-space.git
+cd dsh-j-space
 
 # 一键部署预设到 ~/.dsh/.agent-presets/j-space
 node bin/cli.js install
@@ -152,7 +152,7 @@ dsh --preset j-space "全面重构此模块并补充单元测试"
 ### 3. Cordis 配置文件组装 (`cordis.yml`)
 ```yaml
 - id: j-space-plugin
-  name: '@anonyjcy/dsh-plugin-j-space'
+  name: '@anonyjcy/dsh-j-space'
   config:
     autoDeploy: true
 ```

@@ -11,7 +11,7 @@ import {
   verifyJSpacePreset,
 } from '../src/installer.ts'
 
-describe('dsh-plugin-j-space installer', () => {
+describe('dsh-j-space installer', () => {
   let tempHome: string
 
   beforeEach(async () => {

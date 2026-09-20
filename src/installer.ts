@@ -1,6 +1,6 @@
 /**
  * J-Space preset installer and lifecycle utilities.
- * @module dsh-plugin-j-space/installer
+ * @module @anonyjcy/dsh-j-space/installer
  */
 
 import { cp, mkdir, rm, stat } from 'node:fs/promises'

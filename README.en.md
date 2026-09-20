@@ -1,7 +1,7 @@
-# dsh-plugin-j-space
+# dsh-j-space
 
-[![DSH Market Listed](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-plugin-j-space)
-[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-plugin-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-plugin-j-space)
+[![DSH Market Listed](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-zh.svg)](https://dsh.market/?q=AnonyJcy%2Fdsh-j-space)
+[![npm version](https://img.shields.io/npm/v/@anonyjcy/dsh-j-space.svg?color=blue)](https://www.npmjs.com/package/@anonyjcy/dsh-j-space)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 [简体中文](README.md) | **English**
@@ -15,7 +15,7 @@
 
 ## 🌟 Overview
 
-`dsh-plugin-j-space` integrates the [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite) (SV1 release, continuing V3.7 evolution) into DeepSeek Harness as a native **Agent Preset**.
+`dsh-j-space` integrates the [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite) (SV1 release, continuing V3.7 evolution) into DeepSeek Harness as a native **Agent Preset**.
 
 Unlike traditional flat prompt injections, this plugin provides **full agent scope isolation, multi-tier reasoning routes, externalized workspace ledgers (`.jspace/`), and adaptive verification** across any compatible LLM model (DeepSeek, Claude, GPT, etc.).
 
@@ -104,19 +104,19 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ```bash
 # via npm
-npm install -D @anonyjcy/dsh-plugin-j-space
+npm install -D @anonyjcy/dsh-j-space
 
 # via pnpm
-pnpm add -D @anonyjcy/dsh-plugin-j-space
+pnpm add -D @anonyjcy/dsh-j-space
 
 # Deploy preset to ~/.dsh/.agent-presets/j-space
-npx @anonyjcy/dsh-plugin-j-space install
+npx @anonyjcy/dsh-j-space install
 ```
 
 ### Method 2: Direct Clone & Install (Local Use)
 ```bash
-git clone https://github.com/AnonyJcy/dsh-plugin-j-space.git
-cd dsh-plugin-j-space
+git clone https://github.com/AnonyJcy/dsh-j-space.git
+cd dsh-j-space
 
 # Deploy J-Space preset to ~/.dsh/.agent-presets/j-space/
 node bin/cli.js install
@@ -142,7 +142,7 @@ dsh --preset j-space "Analyze this architecture and implement feature X"
 ### 3. In Cordis Composition (`cordis.yml`)
 ```yaml
 - id: j-space-plugin
-  name: '@anonyjcy/dsh-plugin-j-space'
+  name: '@anonyjcy/dsh-j-space'
   config:
     autoDeploy: true
 ```
