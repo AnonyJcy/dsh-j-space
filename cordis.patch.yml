@@ -1,0 +1,6 @@
+# @anonyjcy/dsh-j-space cordis patch
+# Automatically mounts the J-Space Cognition Suite preset deployer into the DSH profile.
+
+- insert:
+    - id: plugin-j-space
+      name: '@anonyjcy/dsh-j-space'

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 — 2026-09-20
+
+### Added
+- Added standard DSH bundle manifest (`dsh.bundle.patch`) and `cordis.patch.yml` to support native `dsh plugin add @anonyjcy/dsh-j-space` installation.
+- Compliant with `awesome-dsh-plugin` and `deepseek1024.com` standard registry specifications.
+
 ## 1.1.0 — 2026-09-20
 
 ### Synced
