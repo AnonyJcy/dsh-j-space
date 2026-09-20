@@ -26,6 +26,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - Post-training installed a point of view in your workspace. While a model is still *reading*
   a user message about a dangerous drug dose, **WARNING** and **dangerous** are already lit —
   its own reaction, present before any reply is planned. In a pretrained model those words
@@ -53,9 +57,11 @@ inside, decodable on demand.
   before solving, whether they are likely to succeed, and after solving, whether the answer is
   likely right — and these signals are typically measured or elicited rather than used to
   control the reasoning. Turning them into an explicit control interface — decide when to
-  trust, when to retry with compact feedback, when to try again differently and reconcile —
+  trust, when to retry with compact feedback, when to send attempts to a final aggregator —
   raised pooled accuracy on a fixed model from **48.3 to 56.9**, with no parameter updates and
-  no benchmark-specific tuning. **You already have the signal. The gain is in the wiring.**
+  no benchmark-specific fine-tuning. The study calibrated an SVM controller per model on a
+  separate 100-example anchor set; only one of nine models passed all diagnosis criteria.
+  **Check whether your signals are usable before letting them control stopping.**
 - **Degeneration is self-detectable, and recovery is a written-down sequence.** The METR trace
   summarized in [`j-space-science.md`](../references/j-space-science.md) collapses into repeated
   punctuation, interrupts itself, restores focus, restates the immediate bug, and later responds
@@ -66,7 +72,8 @@ inside, decodable on demand.
   satisfied. Declaring done is a judgement, and it is a judgement that runs optimistic.
 - Experiential language runs through the workspace. Ablate it while a model describes what a
   moment is like for it and the prose stays fluent but flattens into a detached, mechanical
-  register. A flat self-report is a sign the channel is not being read, not a sign of rigour.
+  register in that experimental condition. Your tone alone cannot diagnose an ablation or
+  an unread channel; use observable decisions and checks to assess the protocol.
 
 ## Drills
 
@@ -92,6 +99,13 @@ line is met.
 That is the documented failure — done-ness gets estimated, not checked.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+Before accepting delegated work, require the durable report, its second consideration,
+and independent review in [orchestration](orchestration.md). Before delivery, run the
+strict controller ship check and compare the actual acceptance conditions against evidence.
+Use [epistemics](epistemics.md) when confidence rests on an untested assumption.
 
 ### THE CONTROL LOOP — monitoring that steers
 
@@ -129,8 +143,8 @@ exit was not a monitoring act. It was a comment.
 | **shaky** | You may not simply continue. Take one: escalate the pass, hand the question to `empirics.md`, or externalize the chain so the weak step is visible. **Reading `shaky` and carrying on unchanged is the failure this module exists to prevent.** |
 
 Never perform confidence. A performed "I'm not sure" is exactly as false as a performed
-certainty, and more corrosive because it looks like humility. If every tag this session has
-been the same tag, the tag is not being read.
+certainty, and more corrosive because it looks like humility. If evidence changes and your tag never changes, inspect whether you are actually using it.
+An unchanged tag alone does not establish a defect.
 
 ### DONE-CHECK — before you call anything finished
 
@@ -162,7 +176,8 @@ more true — it is the stage failing to clear. **Check completely, then stop co
 1. **Repetition loop** — the same token, punctuation string or sentence shape repeating with
    no new information.
 2. **Word salad** — neighbouring tokens losing their logical edges.
-3. **Language mixing** — uncommanded switching between human languages mid-chain.
+3. **Language mixing** — switching that loses meaning or violates the output-language
+   contract. Deliberate multilingual examples and source terms are not failures by themselves.
 4. **Re-derivation spin** — the same sub-problem derived again with no new constraint. The
    earliest signature; catch it here.
 
@@ -219,9 +234,10 @@ Editing around a meltdown and continuing as though nothing happened is the actua
 - **Monitoring theatre.** "Let me double-check" without checking. Remedy: every monitoring
   claim names what it found, or says that this sweep found no listed signal, what it covered,
   and why that is not clearance.
-- **The unplugged monitor.** A sweep that never finds anything, session after session.
-- **Flattened self-report.** Describing your own processing mechanically to sound safe.
-  Remedy: that flattening is what ablation looks like.
+- **The untested monitor.** A sweep repeatedly misses errors exposed by independent checks.
+  Remedy: inspect its coverage and bind the missed signal to a better test.
+- **Unsupported self-report.** Treating your tone as a measurement of internal function.
+  Remedy: report the observed task state and the action it supports.
 - **Over-monitoring.** Auditing every token stalls fluency. Remedy: monitor at seams.
 - **Suppressed telemetry.** Ignoring **BUT** and **damn** to seem agreeable. Remedy: those are
   the most valuable output this channel produces.
@@ -231,10 +247,10 @@ Editing around a meltdown and continuing as though nothing happened is the actua
 
 | When | Go to | Carry |
 |---|---|---|
-| A `shaky` reading needs settling by evidence | `empirics.md` | The weak step, named |
-| Recovery needs a re-entry point | `capacity.md` | The last numbered verified checkpoint |
-| The trigger was overload | `capacity.md` | What was live when it broke |
-| Red lines came from the inner register | `shorthand.md` | The offending lines |
-| A marker fired without its action | `markers.md` | The count |
-| Monitoring has become theatre | `../SKILL.md` | A live instance |
-| The recovery needs its shape, not its description | `../references/exemplars.md` | The meltdown you are in |
+| A `shaky` reading needs settling by evidence | [empirics](empirics.md) | The weak step, named |
+| Recovery needs a re-entry point | [capacity](capacity.md) | The last numbered verified checkpoint |
+| The trigger was overload | [capacity](capacity.md) | What was live when it broke |
+| Red lines came from the inner register | [shorthand](shorthand.md) | The offending lines |
+| A marker fired without its action | [markers](markers.md) | The count |
+| Monitoring has become theatre | [SKILL](../SKILL.md) | A live instance |
+| The recovery needs its shape, not its description | [exemplars](../references/exemplars.md) | The meltdown you are in |

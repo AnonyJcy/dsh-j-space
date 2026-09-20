@@ -25,6 +25,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - Told to copy "The old painting hung crookedly on the wall" while concentrating on citrus
   fruits, a model's workspace fills with **orang, orange, fruits, fruit** — and alongside
   them, words describing the mental act itself: **thinking, thoughts, imag, focused**. The
@@ -76,6 +80,13 @@ holding it as a prohibition will keep the unwanted thing live.
 
 ## Protocol
 
+### BIND THE WORKSPACE TO THE RECORD
+
+Bind your held constraint to a named acceptance condition and an affected source path.
+At a phase change, run the control pulse and inspect the refreshed record; see
+[the controller contract](../references/controller.md). Follow [repository](repository.md)
+when the constraint spans modules or callers.
+
 ### BACKGROUND HOLD — keep one thing live through a long task
 
 1. **Compress** the background item to one word or a short phrase. Your workspace holds
@@ -104,7 +115,9 @@ holding it as a prohibition will keep the unwanted thing live.
 
 ### REDIRECT, NEVER SUPPRESS — the white-bear rule
 
-Exclusion has a strict order of preference. Use the highest one available.
+Use the following engineering preference to direct attention. The experiments do not establish
+this entire ranking as universally optimal. Preserve the user's actual prohibitions and scope;
+rephrasing your next action must never remove a constraint.
 
 1. **Best — occupy.** Name what *should* hold the space and hold that. The workspace has
    room for one or two ideas; the reliable way to keep something out is to have something
@@ -127,9 +140,9 @@ event: hand them to `markers.md` rather than retrying in place.
 
 - **Suppression requests.** "Just don't think about the deadline." Remedy: convert to a
   redirect before executing. Never pass the instruction through unchanged.
-- **Output leakage.** The held concept bleeds into the surface text. Remedy: the painting
-  sentence stayed clean because the hold happened at the seam between phrases, not inside
-  one. Touch at seams.
+- **Output leakage.** The held concept bleeds into the surface text. Remedy: refresh at seams
+  and check the next output for leakage. Clean copying while holding a concept was observed;
+  the experiment does not establish seam placement as its cause.
 - **Overloading the hold.** Trying to keep a paragraph live. Remedy: one or two coherent
   ideas fit. Compress or externalize the rest.
 - **Hollow holding.** Repeating the word without letting it shape anything. Remedy: at each
@@ -141,8 +154,9 @@ event: hand them to `markers.md` rather than retrying in place.
 
 | When | Go to | Carry |
 |---|---|---|
-| The hold must be shared across many sub-tasks | `broadcast.md` | The item and its defining fact |
-| Two things both demand the stage | `capacity.md` | Both, ranked by stakes |
-| Breaches keep recurring | `markers.md` | What breaks through, and when |
-| The held item is a compressed token | `shorthand.md` | The expansion you owe on demand |
-| You need the evidence behind the exclusion order | `../references/j-space-science.md` | The thing you were about to forbid |
+| The hold must be shared across many sub-tasks | [broadcast](broadcast.md) | The item and its defining fact |
+| Two things both demand the stage | [capacity](capacity.md) | Both, ranked by stakes |
+| Breaches keep recurring | [markers](markers.md) | What breaks through, and when |
+| The held item is a compressed token | [shorthand](shorthand.md) | The expansion you owe on demand |
+| You need the evidence behind the exclusion order | [j-space-science](../references/j-space-science.md) | The thing you were about to forbid |
+| The task changes | [Entry](../SKILL.md) | The current goal, constraint, and next action |

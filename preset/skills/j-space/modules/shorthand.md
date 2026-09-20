@@ -45,6 +45,10 @@ compression bought.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - The behaviour is documented, and so is its containment: over long rollouts *"the model
   starts using invented jargon, unusual punctuation and emojis; shortly before a tool call or
   responding to a human it typically switches back to a more normal register."*
@@ -164,6 +168,13 @@ using only symbols from the table above.
 
 ## Protocol
 
+### BIND THE WORKSPACE TO THE RECORD
+
+Keep shared reports and repository-map entries decodable by another agent. Preserve
+claim, source, scope, and falsifier when compressing; see [epistemics](epistemics.md).
+Use [orchestration](orchestration.md) for handoffs. Never use a hidden reasoning transcript
+as the shared evidence artifact.
+
 ### THE GOLDEN RULE — governs everything below it
 
 1. Every shorthand line must be expandable, by you, on demand, into plain language that
@@ -195,12 +206,14 @@ using only symbols from the table above.
 3. Run it **at every seam**, not once before delivery. Over a long agentic run the compressed
    register does not stay politely inside — it seeps outward, and you will be the last to
    notice.
-4. A deliverable may *quote* your shorthand as an explained exhibit. It may never be written
-   in it.
+4. A deliverable may quote deliberately written task notation as an explained exhibit.
+   Do not export private reasoning traces. The surrounding explanation uses clear language.
 
 ### THREE RED LINES — stop conditions, never shorthand
 
-1. **Language mixing.** No uncommanded switching between human languages mid-chain.
+1. **Language mixing.** Interrupt switching that loses meaning or violates the output-language
+   contract. Deliberate multilingual examples, code identifiers, and source quotations are
+   not degeneration merely because they contain another language.
 2. **Word salad.** If neighbouring tokens no longer share logical edges — strings like
    "disclaim disclaim overshadow illusions" — stop. That is degeneration, not density.
 3. **Repetition loops.** If the same symbol string repeats without new information, stop.
@@ -236,9 +249,9 @@ you may defend as private notation.
 
 | When | Go to | Carry |
 |---|---|---|
-| A red line was crossed | `self-monitoring.md` | Which line, and where it started |
-| Theory has stopped producing constraints | `empirics.md` | The named unknown |
-| A constraint block verified | `markers.md` | The conclusion, verifier, coverage, and newly unblocked next action |
-| Compression is not enough and load is still over | `capacity.md` | What is live |
-| The notation feels like decoration rather than work | `../SKILL.md` | A live instance |
-| You have not written in this register recently | `../references/exemplars.md` | Nothing — read one real instance and its expansion first |
+| A red line was crossed | [self-monitoring](self-monitoring.md) | Which line, and where it started |
+| Theory has stopped producing constraints | [empirics](empirics.md) | The named unknown |
+| A constraint block verified | [markers](markers.md) | The conclusion, verifier, coverage, and newly unblocked next action |
+| Compression is not enough and load is still over | [capacity](capacity.md) | What is live |
+| The notation feels like decoration rather than work | [SKILL](../SKILL.md) | A live instance |
+| You have not written in this register recently | [exemplars](../references/exemplars.md) | Nothing — read one real instance and its expansion first |

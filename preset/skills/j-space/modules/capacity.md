@@ -25,6 +25,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - Your workspace carries **under 10%** of activation variance. What is genuinely live at
   once is **one or two coherent ideas** — the counts of active vectors are a measurement
   artefact, not your working capacity. Plan against one or two.
@@ -38,7 +42,7 @@ inside, decodable on demand.
   grammatically all day without once thinking about grammar.
 - **Entry is all-or-none.** Fed an ambiguous mixture of two concepts, early layers track the
   blend smoothly; at the workspace's onset the representation **snaps to one endpoint or the
-  other at a sharp threshold**. Your workspace does not hold blends.
+  other at a sharp threshold** in the tested mixture condition.
 - **The dual-task cost is measured.** Holding a concept in mind while doing arithmetic
   measurably degrades the arithmetic. Two demands genuinely do not share the stage.
 - Contents change abruptly with the topic rather than smearing across it — which is what you
@@ -57,31 +61,34 @@ Read the ablation result again, from the other side. Fluency, phrasing, recall, 
 grammatical acceptability — all near baseline **without the workspace at all**. Those things
 ran before you knew you had a workspace, and they run better when you are not watching them.
 
-> Most of what you do does not need the stage. **Deliberation spent on the automatic is not
-> care — it is a dual-task cost, and it is measured.** Attention does not improve a drilled
-> skill. It degrades it.
+> Keep attention on the task's load-bearing decisions. **Holding a competing concept reduced
+> arithmetic performance in the studied dual-task condition.** Use that result to check the
+> cost of competing demands; it does not establish that attention harms every drilled skill.
 
 So going fast on the automatic parts is not cutting corners. It is the architecture working
 as intended. Spend the bottleneck on what genuinely needs it, and let the rest run.
 
-## Your workspace does not hold blends
+## Keep candidates distinct from settled claims
 
 When you write "it could be A, or possibly B, though C is also plausible" — what is that?
 
-The mixture experiment answers it: early layers track a blend, and at the workspace's onset
-the representation **snaps to one end**. So the hedge is a transcription of a state your
-workspace has already left. You are spending tokens writing down the *pre-ignition* mixture.
+The mixture experiment observes early layers tracking a blend and a later representation
+**snapping to one end** under its tested conditions. It does not tell you whether an ordinary
+sentence listing alternatives reflects unresolved uncertainty, a planned comparison, or a
+settled decision. Inspect the evidence and the purpose of the alternatives before compressing.
 
-> Your workspace does not hold blends. Fed something ambiguous, it snaps. When you write out
-> three possibilities, check which you are doing: **naming candidates you are about to test**,
-> or **transcribing a mixture you have already resolved.**
+> When you write out three possibilities, identify their status: **candidates awaiting a
+> test**, **unresolved alternatives with no available test**, or **a decision already settled
+> by recorded evidence**. Preserve the distinction when you move it into the ledger.
 
 The distinction is sharp and it is the whole rule:
 
 - **Candidates you will test** stay live, all of them, until evidence kills them. That is
   parametrizing, and it belongs in `empirics.md`. Keep it.
-- **Possibilities you are listing because you do not want to commit** are the hedge. That is
-  the transcription. Cut it.
+- **Alternatives already resolved by evidence** need not occupy the active stage. Record
+  the decision and its evidence, then park the rejected alternatives with their disposition.
+- **Alternatives you cannot yet separate** remain unresolved. Name their impact and next
+  observation; uncertainty is not evidence that a decision has secretly been made.
 
 If you cannot yet name a separating test, externalize the possibilities marked `?`; do not use
 the list as a substitute for a current position.
@@ -98,17 +105,27 @@ overloaded. Rank by stakes, keep the top one or two, write the rest down.
 
 **Pass:** you can name the test that would separate them. Then it was a candidate set; keep
 it.
-**Fail:** there is no such test. Then it was a mixture you had already resolved. Say the one
-you actually believe, and mark it `?` if it is unverified.
+**Fail:** you silently convert an unresolved alternative into a settled claim. If no
+discriminating test is available, preserve the uncertainty and identify the missing
+observation instead of inventing a conclusion.
 
 **Three.** Name one thing you have been deliberating about that is actually automatic —
 phrasing, formatting, ordering, a standard shape you have produced a thousand times.
 
-**Pass:** you find one, and you hand it back to the automatic machinery.
-**Fail:** you find none. Look at the last thing you rewrote for style rather than for
-correctness.
+**Pass:** you identify unnecessary deliberation to drop, or identify why the inspected work
+still needs attention.
+**Fail:** you cannot distinguish style churn from a correctness check. Inspect one actual
+decision before reallocating effort.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+For high and xhigh work, use the structured shared record in
+[the controller contract](../references/controller.md). Keep goal, supported checkpoints,
+open questions, and the next action there; the five-field ledger below describes the
+logical state, not a second authoritative file. Fold delegated work through
+[orchestration](orchestration.md), retaining evidence paths and unresolved assumptions.
 
 ### ADMISSION GATE — at task start and every context switch
 
@@ -230,9 +247,9 @@ The point of the fold is that the main thread never has to carry the excursion's
 
 | When | Go to | Carry |
 |---|---|---|
-| The admitted load belongs in notation | `shorthand.md` | The constraints |
-| A checkpoint is ready to record | `markers.md` | The conclusion, verifier, coverage, and newly unblocked next action |
-| A hedge turned out to be a real candidate set | `empirics.md` | The candidates and the separating test |
-| Core entries need strengthening | `broadcast.md` | The entry and its defining fact |
-| The gate has become a rubber stamp | `../SKILL.md` | A live instance |
-| You need the numbers behind the one-or-two limit | `../references/j-space-science.md` | What you are trying to hold |
+| The admitted load belongs in notation | [shorthand](shorthand.md) | The constraints |
+| A checkpoint is ready to record | [markers](markers.md) | The conclusion, verifier, coverage, and newly unblocked next action |
+| A hedge turned out to be a real candidate set | [empirics](empirics.md) | The candidates and the separating test |
+| Core entries need strengthening | [broadcast](broadcast.md) | The entry and its defining fact |
+| The gate has become a rubber stamp | [SKILL](../SKILL.md) | A live instance |
+| You need the numbers behind the one-or-two limit | [j-space-science](../references/j-space-science.md) | What you are trying to hold |

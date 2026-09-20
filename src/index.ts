@@ -1,5 +1,5 @@
 /**
- * Standalone plugin for DeepSeek Harness that integrates J-Space Cognition Suite V3.7 as an Agent Preset.
+ * Standalone plugin for DeepSeek Harness that integrates J-Space Cognition Suite SV1 as an Agent Preset.
  * @module @deepseek-ai/dsh-plugin-j-space
  */
 
@@ -43,7 +43,7 @@ export function apply(ctx: Context, config: Config = {}): void {
       const installed = await isJSpacePresetInstalled()
       if (!installed) {
         await installJSpacePreset()
-        ctx.logger.info('J-Space Cognition Suite V3.7 preset deployed to DSH user presets directory.')
+        ctx.logger.info('J-Space Cognition Suite SV1 preset deployed to DSH user presets directory.')
       }
     } catch (error) {
       ctx.logger.warn(`Failed to auto-deploy J-Space preset: ${String(error)}`)

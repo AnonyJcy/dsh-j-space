@@ -76,6 +76,8 @@ async function verifyJSpacePreset(presetPath) {
     'preset.yml',
     'agent.cordis.yml',
     'skills/j-space/SKILL.md',
+    'skills/j-space/scripts/control.py',
+    'skills/j-space/scripts/host_bridge.py',
     'skills/j-space/scripts/jspace.py',
     'skills/j-space/scripts/verify_suite.py',
   ]
@@ -98,7 +100,7 @@ const command = process.argv[2] ?? 'status'
 async function main() {
   switch (command) {
     case 'install': {
-      console.log('Installing J-Space Cognition Suite V3.7 preset...')
+      console.log('Installing J-Space Cognition Suite SV1 preset...')
       const dest = await installJSpacePreset()
       console.log(`Successfully installed to: ${dest}`)
       const check = await verifyJSpacePreset(dest)

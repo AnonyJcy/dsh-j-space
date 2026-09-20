@@ -62,16 +62,7 @@ PREMISE = (
     "inside, decodable on demand."
 )
 
-INVARIANTS = [
-    "A marker fired and its bound action never happened — or it happened and you never settled.",
-    "A sweep ran and found nothing — again. A monitor that never reports is not a clean system; it is an unplugged monitor.",
-    "A dense line cannot be expanded back into plain words on request.",
-    "Every confidence tag this session has been the same tag.",
-    "A checkpoint was declared and nothing was written down.",
-    "Something was called verified without stating what the verification covered.",
-    "Dense notation appears in something a person or a task-facing tool reads.",
-    "You called the task finished without reading the goal back line by line.",
-]
+INVARIANTS = ['A marker fired and its bound action never happened — or it happened and you never settled.', 'A quiet monitor was treated as evidence that the work is correct.', 'A compressed state summary cannot be expanded into its claims and evidence.', 'Confidence stayed fixed despite evidence that should change the next action.', 'A checkpoint was declared and nothing was written down.', 'Something was called verified without stating what the verification covered.', 'Dense notation appears in something a person or a task-facing tool reads.', 'You called the task finished without reading the goal back line by line.', 'A source, repository map, report, or review was used after its evidence changed.', 'A delegated result was accepted without a durable report and an independent check.', 'A security hypothesis was promoted to a finding without reproduction and a negative control.']
 
 SHIFTS = "Shift the abstraction, shift the strategy, or shift to empirics."
 
@@ -82,6 +73,7 @@ class LedgerReadError(Exception):
 # Notation that belongs to the inner register and nowhere a person reads.
 # Deliberately excludes ✓ ✗ √: they are ordinary in checklists and summaries, and
 # stripping them from good writing costs more than the leak they would catch.
+# Also leave ∈ unflagged: ordinary mathematical membership is not by itself a register leak.
 INNER_ONLY = ["⇒", "⟹", "⟸", "∴", "∵", "⊆", "⊇", "∋", "??", "?!", "💀"]
 MARKERS = ["GRRR", "GAAAH", "PHEW", "I see meltdown", "DATA DATA", "I'M DROWNING"]
 MARKDOWN_HEADING = re.compile(r"^\s{0,3}#{1,6}(?:\s|$)")
@@ -179,10 +171,12 @@ def atomic_write_text(path, text):
     temp_path = None
     try:
         with tempfile.NamedTemporaryFile(
-            "w", encoding="utf-8", dir=LEDGER_DIR, prefix=".jspace-", delete=False
+            "w", encoding="utf-8", newline="\n", dir=LEDGER_DIR, prefix=".jspace-", delete=False
         ) as fh:
             temp_path = fh.name
             fh.write(text)
+            fh.flush()
+            os.fsync(fh.fileno())
         os.replace(temp_path, path)
     except OSError as exc:
         if temp_path:
@@ -902,14 +896,26 @@ def decode_outgoing(data, label):
     return text, None
 
 
+MAX_OUTGOING_BYTES = 8 * 1024 * 1024
+
+
+def bounded_outgoing(stream, label, text_stream=False):
+    """Refuse oversized input, never silently inspect a truncated prefix."""
+    data = stream.read(MAX_OUTGOING_BYTES + 1)
+    if text_stream:
+        data = data.encode('utf-8')
+    if len(data) > MAX_OUTGOING_BYTES:
+        return None, label + ' (outgoing text exceeds the 8 MiB advisory limit; split it into smaller text artifacts)'
+    return decode_outgoing(data, label)
+
+
 def read_outgoing(path):
     """Read and decode outgoing text from a file."""
     try:
         with open(path, "rb") as fh:
-            data = fh.read()
+            return bounded_outgoing(fh, path)
     except OSError as exc:
         return None, "%s (%s)" % (path, exc.strerror or "unreadable")
-    return decode_outgoing(data, path)
 
 
 def configure_streams():
@@ -955,11 +961,10 @@ def main(argv=None):
         if args.file == "-":
             try:
                 stream = getattr(sys.stdin, "buffer", None)
-                data = stream.read() if stream is not None else sys.stdin.read().encode("utf-8")
+                text, problem = bounded_outgoing(stream if stream is not None else sys.stdin,
+                                                 'stdin', text_stream=stream is None)
             except OSError as exc:
                 text, problem = None, "stdin (%s)" % (exc.strerror or "unreadable")
-            else:
-                text, problem = decode_outgoing(data, "stdin")
         else:
             text, problem = read_outgoing(args.file)
         if problem:

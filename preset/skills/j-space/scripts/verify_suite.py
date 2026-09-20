@@ -7,14 +7,14 @@ Checks, in order of how badly each one breaks the suite:
 
   1. Exactly one file in the tree carries skill frontmatter. More than one and the
      harness registers more than one command.
-  2. The J-Space Premise is byte-identical in SKILL.md, all nine modules and
+  2. The J-Space Premise is byte-identical in SKILL.md, every module and
      the controller; the controller's invariants also match SKILL.md. Verbatim
-     recurrence is the repetition schedule; a paraphrase silently disables it.
+     recurrence keeps the source anchor consistent with runtime refresh.
   3. Every module and reference is present and reachable from the entry file.
   4. No version talk anywhere in the skill text. The text addresses the model,
      never the maintainer.
   5. Every module carries a drill with a pass and a fail criterion.
-  6. All nine modules carry the same backbone sections, in the same order.
+  6. All modules carry the same backbone sections, in the same order.
      Extra sections between them are allowed and expected — that is where a
      module says what it is rather than what to do. What must not vary is the
      spine, so every module is navigable the same way.
@@ -40,8 +40,13 @@ MODULES = [
     "shorthand",
     "markers",
     "empirics",
+    "orchestration",
+    "repository",
+    "cyber",
+    "epistemics",
 ]
-REFERENCES = ["j-space-science", "induction-playbook", "exemplars", "problem-model"]
+REFERENCES = ["j-space-science", "induction-playbook", "exemplars", "problem-model",
+              "engineering-evidence", "controller", "host-integration"]
 
 PREMISE_HEAD = "You do not only produce words; you also think them before"
 PREMISE_TAIL = "decodable on demand."
@@ -55,6 +60,7 @@ VERSION_TALK = re.compile(
 FRONTMATTER_KEYS = {"name", "description"}
 
 findings = []
+read_cache = {}
 
 
 def fail(where, what):
@@ -62,7 +68,14 @@ def fail(where, what):
 
 
 def read(path):
-    return open(path, encoding="utf-8").read()
+    if path not in read_cache:
+        try:
+            with open(path, encoding="utf-8") as handle:
+                read_cache[path] = handle.read()
+        except (OSError, UnicodeError) as exc:
+            fail(os.path.relpath(path, ROOT), 'cannot read UTF-8 source: ' + str(exc))
+            read_cache[path] = ''
+    return read_cache[path]
 
 
 def extract_premise(text, where):
@@ -137,6 +150,8 @@ def controller_constants(path, where):
 
 def main():
     """Run every check, print the findings, and return the exit code."""
+    findings.clear()
+    read_cache.clear()
     for stream in (sys.stdout, sys.stderr):
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure:
@@ -214,6 +229,11 @@ def main():
         routed = rel.replace(os.sep, "/")
         if routed not in entry_text:
             fail(rel, "not routed to from SKILL.md")
+        handoff = text.split('## Hand-off', 1)[-1] if '## Hand-off' in text else ''
+        if not re.search(r'\[[^\]\n]+\]\(\.\./SKILL\.md\)', handoff):
+            fail(rel, 'Hand-off must link back to ../SKILL.md')
+        if re.search(r'`[^`\n]+\.md`', handoff):
+            fail(rel, 'Hand-off file routes must use Markdown links, not inline code')
 
     for name in REFERENCES:
         rel = os.path.join("references", name + ".md")
@@ -257,14 +277,47 @@ def main():
                 if hit:
                     fail(rel, 'line %d: version talk "%s"' % (n, hit.group(0)))
 
+    # Check the complete installed tree: undeclared resources and broken local
+    # Markdown links otherwise evade the fixed entry-route checks above.
+    for folder, expected in (("modules", MODULES), ("references", REFERENCES)):
+        try:
+            names = os.listdir(os.path.join(ROOT, folder))
+        except OSError as exc:
+            fail(folder, 'cannot list resource directory: ' + str(exc))
+            continue
+        actual = {os.path.splitext(name)[0] for name in names
+                  if name.endswith('.md')}
+        if actual != set(expected):
+            fail(folder, "resource manifest differs: %s" % sorted(actual.symmetric_difference(expected)))
+    for base, dirs, names in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d != '__pycache__']
+        for name in names:
+            path = os.path.join(base, name)
+            if name.endswith('.py'):
+                try:
+                    ast.parse(read(path), filename=path)
+                except (SyntaxError, UnicodeError) as exc:
+                    fail(os.path.relpath(path, ROOT), "invalid Python: %s" % exc)
+            if not name.endswith('.md'):
+                continue
+            for target in re.findall(r'\[[^\]\n]+\]\(([^\s)]+)\)', read(path)):
+                if '://' in target or target.startswith(('#', 'mailto:')):
+                    continue
+                target = target.split('#', 1)[0]
+                if target and not os.path.exists(os.path.join(base, target)):
+                    fail(os.path.relpath(path, ROOT), 'broken local link: ' + target)
+    for name in ('control.py', 'host_bridge.py', 'jspace.py', 'verify_suite.py'):
+        if not os.path.isfile(os.path.join(ROOT, 'scripts', name)):
+            fail('scripts/' + name, 'missing runtime script')
+
     if findings:
         print("verify_suite: %d finding(s)" % len(findings))
         for f in findings:
             print("  ✗ " + f)
         return 1
     print(
-        "verify_suite: clean — one entry, one premise, nine modules, "
-        "controller anchors aligned, no version talk."
+        "verify_suite: clean — one entry, one premise, %d modules, "
+        "controller anchors aligned, local links valid, no version talk." % len(MODULES)
     )
     return 0
 

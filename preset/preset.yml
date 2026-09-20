@@ -1,3 +1,3 @@
 name: J-Space Cognition Suite
-description: J-Space Cognition Suite V3.7 认知工作空间 Agent，具备深层推理路由、状态外化账本与自适应验证能力。
+description: J-Space Cognition Suite SV1 认知工作空间 Agent，具备深层推理路由、持久控制器（control.py）、状态外化账本与自适应验证能力。
 order: 5

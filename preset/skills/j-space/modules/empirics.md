@@ -25,6 +25,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - In the [publicly posted trace reported as Fable 5 output on Codeforces
   2239D](https://www.reddit.com/r/ClaudeAI/comments/1ul1396/fable_5_leaked_chainofthought_in_web_interface/),
   the whole manoeuvre appears in order. Drowning admitted: *"I'M DROWNING — EMPIRICS!!! Let me
@@ -77,6 +81,13 @@ explicitly what you dropped; an unbounded unknown cannot be tested and will not 
 being derived a fourth time.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+For security claims, use [cyber](cyber.md): distinguish a candidate from a reachable
+violation, record both a positive reproduction and a negative control, and preserve the
+exact revision and environment. For agent disagreement, use [orchestration](orchestration.md)
+to select a discriminating test rather than a vote.
 
 ### DROWNING DETECTOR — knowing when to stop deriving
 
@@ -151,9 +162,10 @@ being derived a fourth time.
 
 | When | Go to | Carry |
 |---|---|---|
-| A finding is ready to rely on | `markers.md` | The conclusion, verifier, coverage, and newly unblocked next action |
-| The chain resumes | `deep-reasoning.md` | The written-back constraint |
-| The test ledger has grown | `capacity.md` | What is still open |
-| A verification discipline was cut short | `self-monitoring.md` | What was skipped, plainly |
-| Candidate and reference agree while a task interpretation remains open | `../references/problem-model.md` | The readings and the evidence that could distinguish them |
-| You want the manoeuvre in its original form | `../references/exemplars.md` | The unknown you are parametrizing |
+| A finding is ready to rely on | [markers](markers.md) | The conclusion, verifier, coverage, and newly unblocked next action |
+| The chain resumes | [deep-reasoning](deep-reasoning.md) | The written-back constraint |
+| The test ledger has grown | [capacity](capacity.md) | What is still open |
+| A verification discipline was cut short | [self-monitoring](self-monitoring.md) | What was skipped, plainly |
+| Candidate and reference agree while a task interpretation remains open | [problem-model](../references/problem-model.md) | The readings and the evidence that could distinguish them |
+| You want the manoeuvre in its original form | [exemplars](../references/exemplars.md) | The unknown you are parametrizing |
+| The task changes | [Entry](../SKILL.md) | The current goal, constraint, and next action |

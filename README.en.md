@@ -6,16 +6,16 @@
 
 [简体中文](README.md) | **English**
 
-> **J-Space Cognition Suite V3.7** native Agent Preset & standalone Cordis plugin for **DeepSeek Harness (DSH)**.  
+> **J-Space Cognition Suite SV1** native Agent Preset & standalone Cordis plugin for **DeepSeek Harness (DSH)**.  
 > Bringing internal thought representations, externalized workspace ledgers (`.jspace/`), and adaptive verification to unlock full LLM reasoning potential.
 
 ---
 
-> Compatibility: adapted to DSH 0.1.5 `dsh-persona` schema (`config.prefix` / `config.suffix`).
+> Compatibility: adapted to DSH 0.1.6 `dsh-workflow-ptc` and DSH 0.1.5 `dsh-persona` schema (`config.prefix` / `config.suffix`).
 
 ## 🌟 Overview
 
-`dsh-plugin-j-space` integrates the [J-Space Cognition Suite V3.7](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.7) into DeepSeek Harness as a native **Agent Preset**.
+`dsh-plugin-j-space` integrates the [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite) (SV1 release, continuing V3.7 evolution) into DeepSeek Harness as a native **Agent Preset**.
 
 Unlike traditional flat prompt injections, this plugin provides **full agent scope isolation, multi-tier reasoning routes, externalized workspace ledgers (`.jspace/`), and adaptive verification** across any compatible LLM model (DeepSeek, Claude, GPT, etc.).
 
@@ -134,13 +134,13 @@ flowchart TD
     B --> C[Preset Discovery: AgentPresets.list]
     C --> D[Preset Mount: AgentPresets.mount]
     D --> E[Agent Scope]
-    E --> F1[Persona: J-Space V3.7 Architecture]
+    E --> F1[Persona: J-Space SV1 Architecture]
     E --> F2[Tools: Full Coding & Reasoning Tools]
     E --> F3[Skill Filesystem: Mounted skills/j-space/]
-    E --> F4[J-Space Suite: SKILL.md, 9 modules, 4 references, 3 scripts]
+    E --> F4[J-Space Suite: SKILL.md, 13 modules, 7 references, controller & adapters]
     E --> G[Session Model Route: Any Model]
     G --> H[Agent Executes J-Space Cognition Loop]
-    H --> I[Task Workspace: Managed .jspace/ Ledger]
+    H --> I[Task Workspace: Managed .jspace/ Ledger & Control State]
 ```
 
 ---

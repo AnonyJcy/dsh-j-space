@@ -329,7 +329,7 @@ The [competition trace above](https://www.reddit.com/r/ClaudeAI/comments/1ul1396
 is routed here as a full protocol pass. Quoted phases are selected transcriptions from the
 posted screenshots; the bracketed lines, transitions, and bookkeeping are suite-authored.
 
-**Gate.** Multi-stage, heavy constraint bookkeeping, correctness genuinely in doubt. → `loop`.
+**Gate.** Multi-stage, heavy constraint bookkeeping, correctness genuinely in doubt. → `high` (loop pass).
 
 **Re-encode.** *Given the constraints on leg capacity, decide whether the greedy rule is
 sound.* One line, checked against the statement.

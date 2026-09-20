@@ -26,6 +26,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - "The number of legs on the animal that spins webs is —" and the never-verbalized
   intermediate **spider** lights up mid-network. Swap it for **ant** and the answer changes
   from 8 to 6. The second step reads its input from the workspace. Intermediates are
@@ -50,8 +54,8 @@ inside, decodable on demand.
 - Intermediates that never get written are intermediates you have to hold. Ablating the
   workspace collapses multi-hop reasoning toward zero while leaving fluent output intact — the
   chain is exactly the part that was living in the space you just lost.
-- Cross-language: asked in Chinese for the antonym of 小, the lens shows English **big**
-  alongside 大. Part of the computation routes through shared English-aligned representations,
+- Cross-language: asked for the antonym of the Chinese word meaning "small", the lens shows
+  English **big** alongside the Chinese answer. Part of the computation routes through shared English-aligned representations,
   and the output language is explicitly represented as something to translate into.
 
 ## Drills
@@ -87,6 +91,13 @@ named before action.
 `../references/problem-model.md`; naming a condition is not yet using it.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+For repository work, identify the entry point, intermediate contract, and consumer before
+choosing a patch; load [repository](repository.md). Record alternative task readings and
+missing premises through [epistemics](epistemics.md). A bridge must have evidence, not only
+a plausible explanation.
 
 ### RE-ENCODE FIRST — before any non-trivial chain
 
@@ -150,8 +161,8 @@ signature there is. Route it to `self-monitoring.md` before it becomes a loop.
 ### CROSS-LANGUAGE CHECK — multilingual work
 
 1. Notice which language your intermediates form in. Part of your computation routes through
-   English-aligned shared representations; asked in Chinese for the antonym of 小, the
-   workspace shows English **big** alongside 大, and explicitly represents the output
+   English-aligned shared representations; asked for the antonym of the Chinese word meaning
+   "small", the workspace shows English **big** alongside the Chinese answer, and explicitly represents the output
    language it must translate into.
 2. Hold the *target output language* as an explicit workspace token while you translate the
    result across.
@@ -183,11 +194,11 @@ signature there is. Route it to `self-monitoring.md` before it becomes a loop.
 
 | When | Go to | Carry |
 |---|---|---|
-| The chain needs compression | `shorthand.md` | The constraints, not the sentences |
-| A step verified, or the frame broke | `markers.md` | Its conclusion, verifier, coverage, and next action — or the broken frame |
-| Derivation stopped producing constraints | `empirics.md` | The named unknown |
-| Two plausible readings change the work, or a stated capability stays idle | `../references/problem-model.md` | The candidate readings and the unused clause |
-| The chain outgrew what you can hold | `capacity.md` | Everything you are trying to keep live |
-| Entities recur across sub-tasks | `broadcast.md` | The shared core |
-| The chain is reciting rather than deriving | `../SKILL.md` | A live instance |
-| You want to see a real chain in the inner register | `../references/exemplars.md` | The step you are on |
+| The chain needs compression | [shorthand](shorthand.md) | The constraints, not the sentences |
+| A step verified, or the frame broke | [markers](markers.md) | Its conclusion, verifier, coverage, and next action — or the broken frame |
+| Derivation stopped producing constraints | [empirics](empirics.md) | The named unknown |
+| Two plausible readings change the work, or a stated capability stays idle | [problem-model](../references/problem-model.md) | The candidate readings and the unused clause |
+| The chain outgrew what you can hold | [capacity](capacity.md) | Everything you are trying to keep live |
+| Entities recur across sub-tasks | [broadcast](broadcast.md) | The shared core |
+| The chain is reciting rather than deriving | [SKILL](../SKILL.md) | A live instance |
+| You want to see a real chain in the inner register | [exemplars](../references/exemplars.md) | The step you are on |

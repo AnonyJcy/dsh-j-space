@@ -6,24 +6,25 @@
 
 **简体中文** | [English Version](README.en.md)
 
-> **J-Space Cognition Suite V3.7** 原生 DeepSeek Harness (DSH) Agent Preset 预设与独立 Cordis 插件包。  
-> 注入内部表征认知路由、工作区状态外化账本（`.jspace/`）与自适应检验，全面释放大语言模型推理潜能。
+> **J-Space Cognition Suite SV1** 原生 DeepSeek Harness (DSH) Agent Preset 预设与独立 Cordis 插件包。  
+> 注入内部表征认知路由、持久控制器（`control.py`）、工作区状态外化账本（`.jspace/`）与自适应检验，全面释放大语言模型推理潜能。
 
 ---
 
-> 兼容：已适配 DSH 0.1.5 的 `dsh-persona` schema（`config.prefix` / `config.suffix`）。
+> 兼容：已适配 DSH 0.1.6 的 `dsh-workflow-ptc` 与 DSH 0.1.5 的 `dsh-persona` schema（`config.prefix` / `config.suffix`）。
 
 ## 🌟 项目简介
 
-`dsh-plugin-j-space` 将 [J-Space Cognition Suite V3.7](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.7) 完整集成为 DeepSeek Harness 的一等公民 **Agent 预设 (Preset)**。
+`dsh-plugin-j-space` 将 [J-Space Cognition Suite](https://github.com/Tiger3807861189/J-Space-Cognition-Suite)（SV1 发布版，延续 V3.7 演进路线）完整集成为 DeepSeek Harness 的一等公民 **Agent 预设 (Preset)**。
 
-它不是粗暴的 Prompt 拼接，而是真正参与 Cordis **Agent Scope 生命周期隔离、多层认知路由、工作区状态外化账本（`.jspace/`）与自适应验证** 的完整体系，完全解耦并兼容任意大语言模型（DeepSeek-Chat、DeepSeek-Reasoner、Claude、GPT 等）。
+它不是粗暴的 Prompt 拼接，而是真正参与 Cordis **Agent Scope 生命周期隔离、多层认知路由、持久控制器、工作区状态外化账本（`.jspace/`）与自适应验证** 的完整体系，完全解耦并兼容任意大语言模型（DeepSeek-Chat、DeepSeek-Reasoner、Claude、GPT 等）。
 
 ### ✨ 核心特性
 1. **即插即用（Zero-Config Preset）**：部署预设后，DeepSeek Harness 会话创建菜单自动出现 `J-Space Cognition Suite` 预设。
 2. **全生命周期 Scope 隔离**：遵循 Cordis 作用域规范，工具和认知技能严格限定在 J-Space Agent 会话中，不污染其他预设。
-3. **工作区状态外化账本（Active Ledger）**：通过 `jspace.py` 在任务工作区（`cwd`）自动建立 `.jspace/` 认知账本，实现目标跟踪、接缝审计（Seam）、自检断言与断点恢复。
-4. **模型解耦与动态路由**：无缝适配各类基底模型，动态解析模型路由与工作区上下文。
+3. **持久控制器与状态外化（Active Control & Ledger）**：包含 SV1 的持久控制器（`control.py`）、宿主适配器（`host_bridge.py`）以及轻量级账本（`jspace.py`），在任务工作区（`cwd`）维护 `.jspace/`，实现目标跟踪、接缝审计（Seam）、自检断言、代码语义地图与断点恢复。
+4. **全面扩展的 13 大认知与工程模块**：除原版的容量控制、深层推理、定向聚焦等模块外，SV1 引入了 `cyber`（安全分析）、`epistemics`（认识论与信念检验）、`orchestration`（多智能体编排）和 `repository`（代码仓库工程语义地图）。
+5. **模型解耦与动态路由**：无缝适配各类基底模型，动态解析模型路由与工作区上下文。
 
 ---
 
@@ -143,13 +144,13 @@ flowchart TD
     B --> C[Preset Discovery: AgentPresets.list]
     C --> D[Preset Mount: AgentPresets.mount]
     D --> E[Agent Scope]
-    E --> F1[Persona: J-Space V3.7 认知系统]
+    E --> F1[Persona: J-Space SV1 认知系统]
     E --> F2[Tools: 完整编码与思考工具]
     E --> F3[Skill Filesystem: 挂载 skills/j-space/]
-    E --> F4[J-Space Suite: SKILL.md, 9大模块, 4大参考, 3大脚本]
+    E --> F4[J-Space Suite: SKILL.md, 13大模块, 7大参考, 控制器与适配脚本]
     E --> G[Session Model Route: 任意兼容模型]
-    G --> H[Agent 运行 J-Space 认知闭环]
-    H --> I[Task Workspace: 生成并维护 .jspace/ 账本]
+    E --> H[Agent 运行 J-Space 认知闭环]
+    H --> I[Task Workspace: 生成并维护 .jspace/ 账本与控制状态]
 ```
 
 ---

@@ -154,6 +154,8 @@ export async function verifyJSpacePreset(presetPath?: string): Promise<Verificat
     'preset.yml',
     'agent.cordis.yml',
     'skills/j-space/SKILL.md',
+    'skills/j-space/scripts/control.py',
+    'skills/j-space/scripts/host_bridge.py',
     'skills/j-space/scripts/jspace.py',
     'skills/j-space/scripts/verify_suite.py',
   ]

@@ -5,3 +5,5 @@ dist/
 .DS_Store
 .jspace/
 .coverage
+pnpm-lock.yaml
+

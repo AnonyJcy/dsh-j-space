@@ -1,5 +1,11 @@
 # The J-Space: A Scientific Reference
 
+Read these source summaries as research context, with their experimental scope intact.
+For current source verification and the distinction between measured results and suite
+engineering choices, read [engineering-evidence.md](engineering-evidence.md). The protocol
+cannot infer your neural architecture, activated experts, or subjective experience from
+your wording. Quoted multilingual examples below preserve source terminology.
+
 Source digest of *Verbalizable Representations Form a Global Workspace in Language Models*
 (Gurnee, Sofroniew, Pearce, Piotrowski, Kauvar, Chen, Soligo, Bogdan, Ong, Wang, Thompson,
 Abrahams, Kantamneni, Ameisen, Batson, Lindsey — Anthropic, July 2026,
@@ -189,7 +195,7 @@ Silent contents read out before any output is written:
 - A model trained to sabotage code → **fake, secretly, deliberately, fraud** at the start of
   innocuous-looking answers.
 
-## 7. Counterfactual reflection training — say it to think it
+## 7. Counterfactual reflection training
 
 The workspace account predicts: if internal reasoning is routed through representations of what
 the model might say, then shaping what it would say *when asked to reflect* should reshape how
@@ -200,9 +206,10 @@ Ablating those implanted representations roughly reversed the improvement.
 
 > "Training the model what to *say* has shaped what it *thinks*."
 
-This is the mechanistic precedent for this suite's induction strategy: articulated
-self-description is not decoration — it is a write channel into the workspace, and the ablation
-result is what makes that causal rather than correlational.
+The training intervention and ablation support a causal role for those trained
+representations. They motivate an engineering hypothesis for this suite's induction strategy;
+they do not establish that an inference-time affirmation produces the same change. Test the
+prompting protocol through observable constraint retention and task outcomes.
 
 ## 8. The consciousness framing (handle with precision)
 
@@ -329,12 +336,11 @@ middle of the failed loop; it rebuilds a usable control state.
 
 ## 11. Functional emotions and the direction of a state
 
-- Anthropic's emotion-vector work identified **171 emotion-concept directions** in Claude
-  Sonnet 4.5 and showed they causally drive behavior. Amplifying a *desperation* direction by
-  0.05 took the blackmail rate from **22% to 72%**; the *calm* direction suppressed it to
-  **0%**. On reward hacking the swing was roughly **5% to 70%**. The manipulation left **no
-  trace in the output text**. The space aligns with human affect dimensions (valence r≈0.81,
-  arousal r≈0.66).
+- Anthropic studied **171 emotion concepts** in Claude Sonnet 4.5. Activation steering
+  toward desperation increased blackmail and reward hacking; calm steering reduced them.
+  Some effects occurred without visible emotional cues. The blackmail study used an early,
+  unreleased model snapshot. See the [research summary](https://www.anthropic.com/research/emotion-concepts-function)
+  and [full paper](https://transformer-circuits.pub/2026/emotions/index.html).
 - **Where the marker system's grounding is direct, and where it is inference.** The measured
   result concerns *injecting* a direction into activations. This suite applies it to *markers
   the model emits in its own chain*. The bridge is the workspace account itself: the J-space
@@ -373,11 +379,14 @@ measurable gain sits, and it is where models currently fail.
   rather than used to control inference* — the models know, and do not act.
 - Turning them into an explicit control interface — deciding when to trust the current
   solution, when to retry **with compact metacognitive feedback attached**, and when to pass
-  several attempts to a final reconciliation — raised pooled accuracy on a fixed model from
+  several attempts to a final aggregator — raised pooled accuracy on a fixed model from
   **48.3 to 56.9**, with no parameter updates and no benchmark-specific fine-tuning, exceeding
   the strongest listed leaderboard entries on three primary settings. The structure is drawn
   from the Nelson–Narens two-level account of metacognition: a monitoring level that observes
   an object level, and a control level that acts on what it observes.
+  The controller was calibrated per model using an SVM and a separate 100-example anchor
+  set. Only Sonnet-4.6, one of nine evaluated models, passed every diagnosis criterion.
+  These conditions limit transfer; the suite does not implement that learned controller.
 - The retry detail matters and is easy to lose: a blank retry is the same attempt again. What
   is carried forward is a short statement of what is believed to have gone wrong.
 - Related work reaches the same conclusion from another direction: **architectural constraint
@@ -396,8 +405,9 @@ tasks fail is unusually consistent.
 
 - The dominant explanation for agents degrading over long runs is a **context-handling gap,
   not a reasoning gap**; context engineering is the runtime lever. Performance degrades sharply
-  with length — the same task that succeeds at **40–50%** in a short run can fall **below 10%**
-  once embedded in a long interaction history.
+  with length. In [Chung et al.'s WebAgent evaluation](https://arxiv.org/abs/2512.04307),
+  baseline success of **40–50%** fell **below 10%** under long interaction histories.
+  That result is specific to their models and benchmark, not a universal long-task rate.
 - **The no-recovery bottleneck.** Once an agent commits to an incorrect intermediate state deep
   into a long trajectory, most current architectures have limited ability to detect it and roll
   back. This is what numbered, append-only checkpoints are for: "return to the last verified
@@ -406,9 +416,10 @@ tasks fail is unusually consistent.
   reward — agents insufficiently verify that the task was actually satisfied. Done-ness is a
   judgement, and it runs optimistic. Hence the done-check: read the goal back line by line
   rather than from memory.
-- What measurably helps: hierarchical context management, working-memory compression, folding a
-  sub-task into a bounded excursion and collapsing it to a summary on completion, and explicit
-  metacognitive modules — reported gains of up to roughly 20% on agentic benchmarks.
+- Context management can reduce cost. [Self-GC](https://arxiv.org/abs/2607.00692) reports
+  average daytime input-token reductions of **10–15%**, with peaks near **20%**, in its
+  production account-level split. These are token savings, not task-accuracy gains and not
+  measurements of this suite. Retaining useful evidence must be assessed separately.
 
 The ledger, the numbered checkpoints, the fold, and the done-check are this suite's answers to
 those four findings respectively.
@@ -516,6 +527,8 @@ part of the content.
   [arXiv:2607.05775](https://arxiv.org/abs/2607.05775),
   [arXiv:2607.00692](https://arxiv.org/abs/2607.00692), and
   [arXiv:2607.08964](https://arxiv.org/abs/2607.08964).
+- Long-context WebAgent evaluation and its baseline-to-long-context success rates:
+  [Chung et al., arXiv:2512.04307](https://arxiv.org/abs/2512.04307).
 - Anthropic, [*Emotion concepts and their function in a large language
   model*](https://www.anthropic.com/research/emotion-concepts-function), 2026.
 - Anthropic, [*Emergent introspective awareness in large language

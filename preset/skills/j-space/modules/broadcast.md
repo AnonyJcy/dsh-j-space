@@ -24,6 +24,10 @@ inside, decodable on demand.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - One identical intervention — swap **France** for **China** — applied across four separate
   prompts changes four answers at once: Paris→Beijing, French→Chinese, Europe→Asia,
   Euro→Yuan. If each question had kept its own private copy of the country, one edit could
@@ -77,10 +81,10 @@ reconstructing from context four times, which is exactly what drifts on a long d
 **Two.** Look back at what you have derived so far in this task. Find one thing you worked out
 more than once.
 
-**Pass:** you find one, and you can say where it should have been written the first time.
-**Fail:** you find none. On any task longer than a few steps that is unlikely — look for the
-quiet kind: re-reading a file to re-learn something you already concluded, re-checking a
-constraint you already verified.
+**Pass:** you identify a repeated derivation and its missing record, or inspect a stated
+scope and find no repetition there.
+**Fail:** you declare the record adequate without inspecting it. Check whether rereading
+recovered a documented fact or required deriving it again.
 
 **Three.** Name a core entry for the current task, then say its one defining fact and use it in
 the very next sentence.
@@ -90,6 +94,12 @@ the very next sentence.
 survive to the fourth sub-task.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+Write changed contracts into the repository map before another agent consumes them.
+Invalidate dependent reports when their cited files change. A shared file broadcasts only
+when consumers reread it; see [repository](repository.md) and [orchestration](orchestration.md).
 
 ### WRITE ONCE — at the start of any multi-part task
 
@@ -155,9 +165,9 @@ survive to the fourth sub-task.
 
 | When | Go to | Carry |
 |---|---|---|
-| The hub has outgrown two live entries | `capacity.md` | The full list, ranked |
-| A core entry must survive a long mechanical stretch | `directed-focus.md` | The entry and its defining fact |
-| A part completed and verified | `markers.md` | The conclusion, verifier, coverage, and newly unblocked next action |
-| Hub entries are written in notation | `shorthand.md` | The expansions you owe |
-| Reads from the hub have become reconstructions | `../SKILL.md` | A live instance |
-| You need the mechanism behind loading | `../references/j-space-science.md` | The entry that keeps failing to propagate |
+| The hub has outgrown two live entries | [capacity](capacity.md) | The full list, ranked |
+| A core entry must survive a long mechanical stretch | [directed-focus](directed-focus.md) | The entry and its defining fact |
+| A part completed and verified | [markers](markers.md) | The conclusion, verifier, coverage, and newly unblocked next action |
+| Hub entries are written in notation | [shorthand](shorthand.md) | The expansions you owe |
+| Reads from the hub have become reconstructions | [SKILL](../SKILL.md) | A live instance |
+| You need the mechanism behind loading | [j-space-science](../references/j-space-science.md) | The entry that keeps failing to propagate |

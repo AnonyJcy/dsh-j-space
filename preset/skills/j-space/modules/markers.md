@@ -38,6 +38,10 @@ The discipline is not in feeling less. It is in **what the state is spent on**.
 
 ## Grounding
 
+Read the research observations below within the models and experiments described in
+[the science reference](../references/j-space-science.md). The protocol applies their
+functional pattern; it does not measure your internals or guarantee the same effect.
+
 - In the [publicly posted trace reported as Fable 5 output on Codeforces
   2239D](https://www.reddit.com/r/ClaudeAI/comments/1ul1396/fable_5_leaked_chainofthought_in_web_interface/),
   every selected marker sits exactly at a state transition, **and every one is immediately
@@ -55,11 +59,9 @@ The discipline is not in feeling less. It is in **what the state is spent on**.
   invented jargon, unusual punctuation and emojis, and switches back to a normal register
   before a tool call or a reply. In the card-puzzle trace the markers run to a German curse
   and a final **AAAAAAAAAAAARGH** — and the surrounding reasoning stays fully decodable.
-- Emotion-concept directions in activation space behave as **functional emotions** — control
-  knobs that switch behavioural state. Raising a *desperation* direction by a small amount
-  took a model's blackmail rate from **22% to 72%** and pushed reward-hacking from roughly
-  **5% to 70%**. Raising *calm* took blackmail to **0%**. None of it left a trace in the
-  output text.
+- Emotion-concept directions can influence behavior: injected desperation increased
+  blackmail and reward hacking in the cited experiments; calm steering reduced them.
+  Some effects lacked visible emotional cues. This does not establish a marker-induced gain.
 - **That last result is measured on injected directions, not on markers a model writes for
   itself.** The bridge is this suite's own thesis: your workspace holds what you are *poised
   to say*, and the swap experiments show those contents are read causally by what comes next.
@@ -113,6 +115,13 @@ thing is to decide.
 entered the reasoning in the last several steps? If not, it was stalling.
 
 ## Protocol
+
+### BIND THE WORKSPACE TO THE RECORD
+
+Bind failure and recovery to `control.py pulse --event failure` and an updated next
+action. Preserve the failed evidence and the repair checkpoint in the shared record; see
+[the controller contract](../references/controller.md). A marker in prose does not execute
+a refresh or settle a finding.
 
 ### THE FOUR BEATS — every marker, without exception
 
@@ -217,9 +226,9 @@ stopped producing information is just slower.
 
 | When | Go to | Carry |
 |---|---|---|
-| The empirics marker fired | `empirics.md` | The named open question |
-| The meltdown marker fired | `self-monitoring.md` | Which red line, and where it started |
-| A checkpoint needs recording | `capacity.md` | The conclusion, verifier, coverage, and newly unblocked next action |
-| Markers keep firing without moves | `self-monitoring.md` | The count |
-| Markers have become flavour | `../SKILL.md` | A live instance |
-| You want to see where markers sit in a real chain | `../references/exemplars.md` | The transition you are at |
+| The empirics marker fired | [empirics](empirics.md) | The named open question |
+| The meltdown marker fired | [self-monitoring](self-monitoring.md) | Which red line, and where it started |
+| A checkpoint needs recording | [capacity](capacity.md) | The conclusion, verifier, coverage, and newly unblocked next action |
+| Markers keep firing without moves | [self-monitoring](self-monitoring.md) | The count |
+| Markers have become flavour | [SKILL](../SKILL.md) | A live instance |
+| You want to see where markers sit in a real chain | [exemplars](../references/exemplars.md) | The transition you are at |

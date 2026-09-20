@@ -1,4 +1,4 @@
-# The `j-space` agent preset: J-Space Cognition Suite V3.7 coding agent.
+# The `j-space` agent preset: J-Space Cognition Suite SV1 coding agent.
 #
 # This file is an AGENT-PLANE composition. The roster mounts it ONCE under a
 # standing scope; every session naming it joins by scope parentage, so the
@@ -19,7 +19,7 @@
   config:
     suffix: Your working directory is {{cwd}}.
     prefix: >-
-      You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite V3.7 architecture.
+      You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite SV1 architecture.
 
 - id: agent-instructions
   name: '@deepseek-ai/dsh-agent-instructions'
