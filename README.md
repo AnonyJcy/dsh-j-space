@@ -38,17 +38,42 @@
 
 ## 📊 实验与评测数据报告（实测对比）
 
-> 完整测试报告引自原作者实测：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
+> 完整实测报告引自原作者测试发布：
+> - 现行基准报告：[GLM-5.3-Flash-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/GLM-5.3-Flash-J-Space-Capability-Realization-Report)
+> - 早期对照报告（保留存档）：[DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
 
-### 🔬 评测方法与实验设置
+### 🔬 评测一：GLM-5.3-Flash 实测对比（最新报告）
+
+#### 1. 主基准测试准确率对比（Main Benchmark Table）
+
+| Benchmark 基准测试 | GLM-5.3-Flash (基线) | GLM-5.3-Flash **+ J-Space V3.7/SV1**† | GLM-5.3 | Opus-5 | Fable 5.1 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/ tools)** | 55.3 | **59.2** | 62.5 | 64.7 | 65.0 |
+| **Terminal Bench 2.1** | 84.3 | **88.8** | 88.2 | *89.1 | *91.4 |
+| **DeepSWE v1.1** | 63.4 | **68.0** | 66.9 | 68.8 | 67.4 |
+| **Agents' Last Exam** | 26.3 | **30.5** | 28.5 | 31.6 | — |
+| **AutomationBench (Public)** | 48.8 | **51.1** | 48.2 | 50.3 | — |
+
+*\* 注：Terminal Bench 2.1 的 Opus-5 与 Fable 5.1 为第三方独立测评，无官方数据。*  
+*\† 为基于有限对照实验的估算值。*
+
+#### 2. 速度与 Token 消耗效率对比 (GAIA 对照)
+
+| 指标维度 | 提升比率 / 效果 |
+| :--- | :---: |
+| **运行速度 (Speed)** | **1.87×** |
+| **Token 效率 (Token Efficiency)** | **1.41×** |
+
+---
+
+### 🔬 评测二：DeepSeek-V4-Flash 实测对比（历史存档）
+
 - **评测基底**：`DeepSeek-V4-Flash-Vision-Exp`
 - **运行环境**：DeepSeek Harness (标准模式)
 - **评测方式**：对权威基准子集与同类型小集（Terminal-Bench 2.1 中 medium 20 / hard 10，DeepSWE 中 TypeScript 10 / Python 10 / Go 10 / JavaScript 2 / Rust 2，GAIA 中 level1 / level3 等）进行严格的 **有/无 J-Space 臂对照（A/B Testing）**，同模型、同环境、同采样参数，仅切换 J-Space 接入。
 - **测算维度**：① 准确率（Accuracy）；② 墙钟与 token 效率（Wall-Clock & Token Efficiency）。
 
----
-
-### 1. 主基准测试准确率对比（Main Benchmark Table）
+#### 1. 主基准测试准确率对比（Main Benchmark Table）
 
 | Benchmark 基准测试 | DeepSeek V4-Flash (基线) | DeepSeek V4-Flash **+ J-Space V3.7** | GLM-5.3 | Kimi-K3 | Opus-4.8 | Fable 5 (w/ fallback) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -65,9 +90,7 @@
 
 *\* 注：HLE 数据未披露，沿用 DeepSeek V4-Flash-0731。综合均分覆盖六列均有值的 7 个项目行。*
 
----
-
-### 2. 速度与 Token 消耗效率对比（Speed & Token Efficiency）
+#### 2. 速度与 Token 消耗效率对比（Speed & Token Efficiency）
 
 | Benchmark 基准测试 | 墙钟时间比 τ | 提速幅度 | 输出 Token 变化 | 总 Token 变化 | **单位时间得分 (产出比)** | 每成功任务成本 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |

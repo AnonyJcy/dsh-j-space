@@ -31,17 +31,42 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ## 📊 Empirical Capability Realization Report
 
-> Full test report by the author: [DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
+> Full evaluation reports by the original author:
+> - Current Benchmark Report: [GLM-5.3-Flash-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/GLM-5.3-Flash-J-Space-Capability-Realization-Report)
+> - Earlier Comparative Report (Preserved Archive): [DeepSeek-V4-J-Space-Capability-Realization-Report](https://github.com/Tiger3807861189/DeepSeek-V4-J-Space-Capability-Realization-Report)
 
-### 🔬 Methodology & Setup
+### 🔬 Benchmark 1: GLM-5.3-Flash Evaluation (Latest Report)
+
+#### 1. Main Benchmark Table (Accuracy Comparison)
+
+| Benchmark | GLM-5.3-Flash (Baseline) | GLM-5.3-Flash **+ J-Space V3.7/SV1**† | GLM-5.3 | Opus-5 | Fable 5.1 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **HLE (w/ tools)** | 55.3 | **59.2** | 62.5 | 64.7 | 65.0 |
+| **Terminal Bench 2.1** | 84.3 | **88.8** | 88.2 | *89.1 | *91.4 |
+| **DeepSWE v1.1** | 63.4 | **68.0** | 66.9 | 68.8 | 67.4 |
+| **Agents' Last Exam** | 26.3 | **30.5** | 28.5 | 31.6 | — |
+| **AutomationBench (Public)** | 48.8 | **51.1** | 48.2 | 50.3 | — |
+
+*\* Note: Terminal Bench 2.1 figures for Opus-5 and Fable 5.1 are independently measured by a third party; no official entries exist.*  
+*\† Estimated, based on limited controlled experiments.*
+
+#### 2. Speed and Token Efficiency Table (GAIA Controlled Pair)
+
+| Metric | Factor / Improvement |
+| :--- | :---: |
+| **Speed** | **1.87×** |
+| **Token Efficiency** | **1.41×** |
+
+---
+
+### 🔬 Benchmark 2: DeepSeek-V4-Flash Evaluation (Historical Archive)
+
 - **Base Model**: `DeepSeek-V4-Flash-Vision-Exp`
 - **Harness**: DeepSeek Harness (Standard Mode)
 - **Methodology**: Rigorous **A/B Testing** with and without J-Space on authoritative benchmark subsets and same-type mini-sets (Terminal-Bench 2.1: 20 medium / 10 hard; DeepSWE: 10 TypeScript / 10 Python / 10 Go / 2 JavaScript / 2 Rust; GAIA: level 1 / level 3, etc.), with identical model, environment, and sampling — only the J-Space toggle differs.
 - **Evaluation Dimensions**: ① Accuracy / Pass Rate; ② Wall-clock & Token Efficiency.
 
----
-
-### 1. Main Benchmark Table (Accuracy Comparison)
+#### 1. Main Benchmark Table (Accuracy Comparison)
 
 | Benchmark | DeepSeek V4-Flash (Baseline) | DeepSeek V4-Flash **+ J-Space V3.7** | GLM-5.3 | Kimi-K3 | Opus-4.8 | Fable 5 (w/ fallback) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -58,9 +83,7 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 *\* Note: HLE scores were not disclosed and follow DeepSeek V4-Flash-0731. The average covers the 7 rows where all six columns have values.*
 
----
-
-### 2. Speed and Token Efficiency Table
+#### 2. Speed and Token Efficiency Table
 
 | Benchmark | Wall-clock τ | Speedup | Output Tokens | Total Tokens | **Score per Unit Time** | Cost per Successful Task |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
