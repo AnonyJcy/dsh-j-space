@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 — 2026-09-23
+
+### Changed
+- Documented DSH's host-specific, model-selectable subagent setup without bundling provider or model IDs.
+- Removed local DSH screenshots that exposed workspace labels from the public repository and package source.
+
 ## 1.1.1 — 2026-09-20
 
 ### Added

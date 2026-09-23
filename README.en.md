@@ -21,14 +21,6 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ---
 
-## 📸 Screenshots & Preview
-
-| DSH Preset Selection (Zero-Config) | J-Space Cognition Session in Action |
-| :---: | :---: |
-| ![DSH Preset Selection](assets/preset-selection.png) | ![J-Space Runtime Session](assets/runtime-session.png) |
-
----
-
 ## 📊 Empirical Capability Realization Report
 
 > Full evaluation reports by the original author:
@@ -133,6 +125,20 @@ node bin/cli.js status
 1. Create a new Session.
 2. Select **J-Space Cognition Suite** in the **Agent Preset** dropdown.
 3. Pick any compatible model (`deepseek-chat`, `deepseek-reasoner`, etc.) and start your task.
+
+### Enable model selection for spawn subagents in Web UI
+
+J-Space spawn subagents use DSH's official tool-subagent. The public preset leaves this option off by default to remain compatible with DSH profiles that do not load the Host settings plugin. To let the Agent choose a model and reasoning effort for each delegated task, add this to the preset's tool-subagent config:
+
+    config:
+      provider: spawn
+      toolName: subagent
+      modelSelectionSettings: true
+      backgroundMode: continuable
+
+Then open **Plugins → Subagent → Model selection** in DSH Web Settings, enable **Allow agents to choose models for Subagents**, and select permitted routes from the current DSH model catalog. Start a new session for the setting to take effect.
+
+Routes come from each DSH deployment's own model catalog and authorization list; J-Space hardcodes no provider or model IDs. Select newly added routes in Subagent settings when needed. This option requires the Host composition to load @deepseek-ai/dsh-tool-subagent/model-selection-settings; leave modelSelectionSettings unset in profiles without that Host plugin. The setting applies to new sessions. DSH fork subagents inherit the parent session's model by design.
 
 ### 2. In DeepSeek Harness CLI
 ```bash

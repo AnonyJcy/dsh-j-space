@@ -28,14 +28,6 @@
 
 ---
 
-## 📸 运行与效果预览
-
-| DSH 预设选择（即插即用） | J-Space 认知工作流实况 |
-| :---: | :---: |
-| ![DSH Preset Selection](assets/preset-selection.png) | ![J-Space Runtime Session](assets/runtime-session.png) |
-
----
-
 ## 📊 实验与评测数据报告（实测对比）
 
 > 完整实测报告引自原作者测试发布：
@@ -143,6 +135,20 @@ node bin/cli.js status
 1. 打开 DeepSeek Harness Web 界面，点击 **New Session**（新建会话）。
 2. 在 **Agent Preset** 下拉选单中，直接选择 **J-Space Cognition Suite**。
 3. 选择任意兼容的模型（`deepseek-chat` / `deepseek-reasoner` 等）开始任务。
+
+### 在 Web UI 中为 spawn 子代理启用模型选择
+
+J-Space 的 spawn 子代理使用 DSH 官方 tool-subagent。公开预设默认不打开此选项，以兼容没有 Host 设置插件的 DSH 配置。若要让 Agent 为每个子任务选择模型和推理强度，在预设的 tool-subagent 配置中加入：
+
+    config:
+      provider: spawn
+      toolName: subagent
+      modelSelectionSettings: true
+      backgroundMode: continuable
+
+然后在 DSH Web 设置中打开 **插件 → Subagent → Model selection**，启用 **允许 Agent 为 Subagent 选择模型**，并从当前 DSH 模型目录勾选允许使用的路由。新建会话后生效。
+
+模型路由由每个 DSH 部署自己的模型目录和授权列表决定；J-Space 不绑定任何提供方或模型 ID。新增模型后，在 Subagent 设置中勾选对应路由即可。此官方选项要求 Host 组合加载 @deepseek-ai/dsh-tool-subagent/model-selection-settings；不含该 Host 插件的配置文件应保持 modelSelectionSettings 未设置。设置只作用于新会话。fork 子代理按 DSH 设计继承父会话模型。
 
 ### 2. CLI 命令行
 ```bash
