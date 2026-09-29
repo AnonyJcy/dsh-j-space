@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.2.0 — 2026-09-30
+
+### Changed
+- **DSH 0.2.0 preset contract.** `cordis.patch.yml` now declares the `j-space`
+  preset directly as one `@deepseek-ai/dsh-agent-preset` row, the way the shipped
+  presets (`@deepseek-ai/dsh-web-app/presets/*.patch.yml`) do. Since DSH 0.1.7
+  nothing scans `$DSH_HOME/.agent-presets/`, so the previous shape of this file —
+  a row that only mounted the deployer plugin — no longer registered any preset.
+- The preset composition previously in `preset/agent.cordis.yml` is inlined into
+  that declaration (a preset row is the contract; a bundle cannot reference a
+  sibling file). `customSkillDirs` resolves `preset/skills/` relative to this
+  patch's own directory via `baseUrl`, so the suite travels with the package and
+  needs neither an absolute path nor a deploy step.
+
+### Retained
+- `src/`, `bin/dsh-j-space` and `preset/agent.cordis.yml` remain available for the
+  legacy `$DSH_HOME/.agent-presets/` deployment. They are no longer how the preset
+  is registered.
+
 ## 1.1.2 — 2026-09-23
 
 ### Changed
