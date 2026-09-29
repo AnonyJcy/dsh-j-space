@@ -25,6 +25,7 @@
 # `$DSH_HOME/.agent-presets/` deployment; they are no longer how the preset is
 # registered.
 
+
 - insert:
     - id: preset-j-space
       name: '@deepseek-ai/dsh-agent-preset'
@@ -216,6 +217,8 @@
 
               - id: tool-ralph
                 name: '@deepseek-ai/dsh-tool-ralph'
+                # Shipped standard keeps ralph off (dsh-base default); restated for parity.
+                disabled: true
                 config:
                   subagentProvider: spawn
                   maxRounds: 64
@@ -240,5 +243,5 @@
           - id: tool-web
             name: '@deepseek-ai/dsh-tool-web'
             config:
-              fetch: false
+              fetch: true
               searchTimeoutMs: 60000

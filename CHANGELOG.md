@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.2 — 2026-09-30
+
+### Fixed
+- `tool-ralph` now restates `disabled: true`, matching the shipped `standard`
+  preset (where `dsh-base` keeps ralph off). This composition had left it
+  enabled since the 0.1.x era; parity is now explicit.
+- `tool-web` enables `fetch`, so the preset exposes `web_fetch` alongside
+  `web_search`. It previously set `fetch: false`, which registered
+  `web_search` only and switched the search guidance to snippets-only. The
+  other shipped presets (`standard`, `ptc`, `cordis`) all keep `fetch: true`.
+
+### Note
+- Field-level parity with `standard` is now: composition identical except two
+  deliberate differences — this preset's persona prefix names the J-Space
+  Cognition Suite, and `skill-filesystem` adds its own `preset/skills/` root.
+
 ## 1.2.1 — 2026-09-30
 
 ### Added
