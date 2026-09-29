@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.2.1 — 2026-09-30
+
+### Added
+- Full row parity with the shipped `standard` preset. The composition was missing
+  three rows, so this preset offered strictly fewer capabilities than the default:
+  - `command-goal` — the `/goal` slash command (create/edit/pause/resume/clear the
+    current goal from the UI).
+  - `present` — the `present` tool that declares final deliverables so the user can
+    open them in their default application.
+  - `tool-plugin-manager` — the `plugin_manager` tool row. Shipped `disabled: true`
+    in `dsh-base` and restated here, exactly as `standard` does.
+- `modelSelectionSettings: true` on the `tool-subagent` row, restoring the ability
+  to choose a child subagent's `provider`/`model`/`reasoning_effort` and to use the
+  `list_subagent_models` tool.
+
+### Note
+- `modelSelectionSettings: true` requires the Host to compose
+  `@deepseek-ai/dsh-tool-subagent/model-selection-settings`, which the **web-app
+  bundle** supplies. A host without that row (e.g. a bare headless profile) fails
+  this mount rather than silently downgrading.
+
 ## 1.2.0 — 2026-09-30
 
 ### Changed

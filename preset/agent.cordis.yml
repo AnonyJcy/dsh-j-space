@@ -68,6 +68,9 @@
 
 # ── goals ───────────────────────────────────────────────────────────────────
 
+- id: command-goal
+  name: '@deepseek-ai/dsh-command-goal'
+
 - id: tool-goal
   name: '@deepseek-ai/dsh-tool-goal'
 
@@ -136,6 +139,10 @@
       config:
         provider: spawn
         toolName: subagent
+        # Off unless the Host composes @deepseek-ai/dsh-tool-subagent/model-selection-settings
+        # (supplied by the web-app bundle); a missing row fails this mount rather than
+        # silently downgrading.
+        modelSelectionSettings: true
         backgroundMode: continuable
 
     - id: tool-subagent-fork
@@ -186,6 +193,13 @@
   name: '@deepseek-ai/dsh-tool-todo'
   config:
     allowParallelInProgress: true
+
+- id: present
+  name: '@deepseek-ai/dsh-tool-present'
+
+- id: tool-plugin-manager
+  name: '@deepseek-ai/dsh-plugin-manager/tools'
+  disabled: true
 
 - id: tool-web
   name: '@deepseek-ai/dsh-tool-web'
