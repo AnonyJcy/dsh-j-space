@@ -11,7 +11,15 @@
 
 ---
 
-> 兼容：已适配 DSH 0.1.6 的 `dsh-workflow-ptc` 与 DSH 0.1.5 的 `dsh-persona` schema（`config.prefix` / `config.suffix`）。
+> **当前适配：DSH 0.2.0，项目版本 1.2.2。** 通过原生 bundle patch 注册 `j-space` 预设，并对齐该版本 Web 应用的 `standard` 预设工具配置。默认面向加载了子代理模型选择设置插件的 Web profile；自定义或 headless profile 的宿主要求见下文。
+
+### DSH 0.2.0 适配要点
+
+- **1.2.0：原生预设注册**。通过 [cordis.patch.yml](./cordis.patch.yml) 中的 `@deepseek-ai/dsh-agent-preset` 声明注册预设，技能目录随包解析，无需额外部署。DSH 自 0.1.7 起不再扫描 `$DSH_HOME/.agent-presets/`，旧 CLI 复制文件的方式不能在 0.2.0 中注册预设。
+- **1.2.1：补齐标准工具配置**。加入 `/goal` 命令和 `present` 交付工具，默认配置 `modelSelectionSettings: true`；插件管理工具行与标准预设一致，保持禁用。
+- **1.2.2：对齐默认行为**。启用 `web_fetch`（同时保留 `web_search`），显式禁用 Ralph。保留 J-Space 专属 persona 与技能目录。
+
+历史上的 DSH 0.1.5 persona schema 与 0.1.6 `dsh-workflow-ptc` 适配记录见 [CHANGELOG.md](./CHANGELOG.md)；它们不代表当前 1.2.x 仍支持所有旧版宿主。
 
 ## 🌟 项目简介
 
@@ -97,35 +105,30 @@
 
 ---
 
-## 🚀 安装与一键部署
+## 🚀 安装（DSH 0.2.0）
 
-本插件内置了开箱即用的原生 Node.js CLI 工具，无需额外安装其他依赖即可直接执行安装：
-
-### 方式一：通过 npm / pnpm 安装（官方源）
+### 方式一：通过 DSH 插件管理安装（推荐）
 
 ```bash
-# npm 安装
-npm install -D @anonyjcy/dsh-j-space
-
-# pnpm 安装
-pnpm add -D @anonyjcy/dsh-j-space
-
-# 运行 CLI 一键部署预设
-npx @anonyjcy/dsh-j-space install
+# 安装到实际使用的 Web profile，而不是任意项目的 node_modules
+dsh plugin --profile web add @anonyjcy/dsh-j-space@latest
 ```
 
-### 方式二：克隆仓库直接安装（本地使用）
+DSH 从包的 `dsh.bundle.patch` 字段加载 [cordis.patch.yml](./cordis.patch.yml)，由其中的声明注册 `j-space`。仅执行 `npm install` / `pnpm add` 到普通项目目录，并不会将预设注册到 DSH profile。
+
+请确认安装的包版本为 **1.2.2 或更新版本**。若 npm 尚未发布对应版本，可使用下面的仓库安装方式。替换已安装的包后，重启当前 DSH Web 进程并新建会话；不要再执行旧版 `install` CLI 作为注册步骤。自定义 Web profile 请将命令中的 `web` 替换为实际 profile 名称。
+
+### 方式二：安装本地仓库版本
 
 ```bash
 git clone https://github.com/AnonyJcy/dsh-j-space.git
 cd dsh-j-space
 
-# 一键部署预设到 ~/.dsh/.agent-presets/j-space
-node bin/cli.js install
-
-# 检查安装状态与完整性
-node bin/cli.js status
+# 将当前包目录加入 Web profile
+dsh plugin --profile web add "$PWD"
 ```
+
+同样通过 bundle patch 注册预设；技能直接来自包内的 [preset/skills/j-space](./preset/skills/j-space/)，不需要复制到用户预设目录。
 
 ---
 
@@ -136,26 +139,22 @@ node bin/cli.js status
 2. 在 **Agent Preset** 下拉选单中，直接选择 **J-Space Cognition Suite**。
 3. 选择任意兼容的模型（`deepseek-chat` / `deepseek-reasoner` 等）开始任务。
 
-### 在 Web UI 中为 spawn 子代理启用模型选择
+### 在 Web UI 中配置 spawn 子代理模型选择
 
-J-Space 的 spawn 子代理使用 DSH 官方 tool-subagent。公开预设默认不打开此选项，以兼容没有 Host 设置插件的 DSH 配置。若要让 Agent 为每个子任务选择模型和推理强度，在预设的 tool-subagent 配置中加入：
+自 **1.2.1** 起，J-Space 的 spawn 子代理已默认配置 `modelSelectionSettings: true`，无需再次添加该字段。这只是启用宿主设置接入，不等于自动允许 Agent 使用所有模型。
 
-    config:
-      provider: spawn
-      toolName: subagent
-      modelSelectionSettings: true
-      backgroundMode: continuable
+在 DSH Web 设置中打开 **插件 → Subagent → Model selection**，启用 **允许 Agent 为 Subagent 选择模型**，并从当前 DSH 模型目录勾选允许使用的路由。新建会话后生效。
 
-然后在 DSH Web 设置中打开 **插件 → Subagent → Model selection**，启用 **允许 Agent 为 Subagent 选择模型**，并从当前 DSH 模型目录勾选允许使用的路由。新建会话后生效。
+模型路由由每个 DSH 部署自己的模型目录和授权列表决定；J-Space 不绑定任何提供方或模型 ID。新增模型后，在 Subagent 设置中勾选对应路由即可。fork 子代理按 DSH 设计继承父会话模型。
 
-模型路由由每个 DSH 部署自己的模型目录和授权列表决定；J-Space 不绑定任何提供方或模型 ID。新增模型后，在 Subagent 设置中勾选对应路由即可。此官方选项要求 Host 组合加载 @deepseek-ai/dsh-tool-subagent/model-selection-settings；不含该 Host 插件的配置文件应保持 modelSelectionSettings 未设置。设置只作用于新会话。fork 子代理按 DSH 设计继承父会话模型。
+### 2. 自定义 / headless profile 的宿主要求
 
-### 2. CLI 命令行
-```bash
-dsh --preset j-space "全面重构此模块并补充单元测试"
-```
+默认预设要求 Host 加载 `@deepseek-ai/dsh-tool-subagent/model-selection-settings`，DSH Web 应用 bundle 提供此插件。未加载该插件的宿主会导致预设挂载失败，而不是静默降级。
 
-### 3. Cordis 配置文件组装 (`cordis.yml`)
+若要在这种宿主中使用，请显式补齐 Host 设置插件，或在自己的预设覆盖配置中移除 / 关闭 spawn 子代理的 `modelSelectionSettings` 字段。预设选择与启动参数应以所用 DSH profile 的文档为准，不能直接沿用旧版 `dsh --preset j-space` 示例。
+
+### 3. 旧版独立 Cordis 插件（仅供迁移参考）
+
 ```yaml
 - id: j-space-plugin
   name: '@anonyjcy/dsh-j-space'
@@ -163,15 +162,18 @@ dsh --preset j-space "全面重构此模块并补充单元测试"
     autoDeploy: true
 ```
 
+这段配置仅调用旧版文件部署插件，不是 DSH 0.2.0 的预设注册方式。当前版本请使用上文的 bundle 安装方式。
+
 ---
 
 ## 🧩 核心架构与数据流
 
 ```mermaid
 flowchart TD
-    A[新建 Session] --> B[选择 j-space 预设]
-    B --> C[Preset Discovery: AgentPresets.list]
-    C --> D[Preset Mount: AgentPresets.mount]
+    P[Profile 加载 bundle patch] --> R[注册 j-space 预设声明]
+    R --> A[新建 Session]
+    A --> B[选择 j-space 预设]
+    B --> D[挂载预设工具与技能]
     D --> E[Agent Scope]
     E --> F1[Persona: J-Space SV1 认知系统]
     E --> F2[Tools: 完整编码与思考工具]
@@ -184,7 +186,9 @@ flowchart TD
 
 ---
 
-## 🛠️ CLI 命令一览
+## 🛠️ 旧版文件部署 CLI（仅供迁移参考）
+
+以下命令仍保留在包中，管理的是 `$DSH_HOME/.agent-presets/j-space`（默认 `~/.dsh/.agent-presets/j-space`）的旧版副本。`status` / `verify` 只检查这些文件，**不能用于确认 DSH 0.2.0 bundle 已加载或预设已注册**；请在当前 Web profile 的新建会话菜单确认预设是否出现。
 
 ```bash
 node bin/cli.js install    # 安装 J-Space Preset 到 DSH 用户预设目录 (~/.dsh/.agent-presets/j-space)
@@ -197,7 +201,7 @@ node bin/cli.js status     # 查看当前安装状态与配置路径
 
 ## 📄 开源许可证
 
-本项目基于 [MIT License](./LICENSE) 开源。套件第三方声明见 [THIRD_PARTY_NOTICES.md](./preset/skills/j-space/THIRD_PARTY_NOTICES.md)。
+本项目基于 [MIT License](./LICENSE) 开源。J-Space 套件来源及原作者说明见 [上游项目](https://github.com/Tiger3807861189/J-Space-Cognition-Suite)。
 
 ## 维护 / Maintenance
 

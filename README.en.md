@@ -11,7 +11,15 @@
 
 ---
 
-> Compatibility: adapted to DSH 0.1.6 `dsh-workflow-ptc` and DSH 0.1.5 `dsh-persona` schema (`config.prefix` / `config.suffix`).
+> **Current target: DSH 0.2.0; project version: 1.2.2.** Registers `j-space` through a native bundle patch and aligns its tool configuration with that version's Web `standard` preset. The default composition targets a Web profile with the subagent model-selection settings plugin; see the host requirements below for custom or headless profiles.
+
+### DSH 0.2.0 adaptation highlights
+
+- **1.2.0: native preset registration**. The `@deepseek-ai/dsh-agent-preset` declaration in [cordis.patch.yml](./cordis.patch.yml) registers the preset, with skills resolved relative to the package and no separate deployment step. Since DSH 0.1.7, `$DSH_HOME/.agent-presets/` is no longer scanned; copying files with the legacy CLI does not register a preset in 0.2.0.
+- **1.2.1: standard tool composition**. Adds the `/goal` command and `present` deliverable tool, and sets `modelSelectionSettings: true` by default. The plugin-manager tool row remains disabled, matching the standard preset.
+- **1.2.2: aligned defaults**. Enables `web_fetch` alongside `web_search` and explicitly disables Ralph. Keeps the J-Space-specific persona and skill directory.
+
+Historical adaptations for the DSH 0.1.5 persona schema and 0.1.6 `dsh-workflow-ptc` are recorded in [CHANGELOG.md](./CHANGELOG.md); they do not imply that the current 1.2.x release supports every older host.
 
 ## 🌟 Overview
 
@@ -90,32 +98,30 @@ Unlike traditional flat prompt injections, this plugin provides **full agent sco
 
 ---
 
-## 🚀 Installation & Deployment
+## 🚀 Installation (DSH 0.2.0)
 
-### Method 1: Install from npm / pnpm (Official Registry)
+### Method 1: Install with the DSH plugin manager (recommended)
 
 ```bash
-# via npm
-npm install -D @anonyjcy/dsh-j-space
-
-# via pnpm
-pnpm add -D @anonyjcy/dsh-j-space
-
-# Deploy preset to ~/.dsh/.agent-presets/j-space
-npx @anonyjcy/dsh-j-space install
+# Install into the Web profile you use, not an arbitrary project's node_modules
+dsh plugin --profile web add @anonyjcy/dsh-j-space@latest
 ```
 
-### Method 2: Direct Clone & Install (Local Use)
+DSH loads [cordis.patch.yml](./cordis.patch.yml) through the package's `dsh.bundle.patch` field; its declaration registers `j-space`. Running `npm install` / `pnpm add` in an ordinary project directory alone does not register the preset in a DSH profile.
+
+Check that the installed package is **1.2.2 or newer**. If that version is not yet published on npm, use the repository installation below. After replacing an installed package, restart the current DSH Web process and create a new session. Do not run the legacy `install` CLI as a registration step. For a custom Web profile, replace `web` with its actual profile name.
+
+### Method 2: Install a local repository checkout
+
 ```bash
 git clone https://github.com/AnonyJcy/dsh-j-space.git
 cd dsh-j-space
 
-# Deploy J-Space preset to ~/.dsh/.agent-presets/j-space/
-node bin/cli.js install
-
-# Check status
-node bin/cli.js status
+# Add the current package directory to the Web profile
+dsh plugin --profile web add "$PWD"
 ```
+
+This also registers the preset through the bundle patch. Skills are loaded from the package's [preset/skills/j-space](./preset/skills/j-space/) directory; no copy into the user preset directory is needed.
 
 ---
 
@@ -126,26 +132,22 @@ node bin/cli.js status
 2. Select **J-Space Cognition Suite** in the **Agent Preset** dropdown.
 3. Pick any compatible model (`deepseek-chat`, `deepseek-reasoner`, etc.) and start your task.
 
-### Enable model selection for spawn subagents in Web UI
+### Configure model selection for spawn subagents in Web UI
 
-J-Space spawn subagents use DSH's official tool-subagent. The public preset leaves this option off by default to remain compatible with DSH profiles that do not load the Host settings plugin. To let the Agent choose a model and reasoning effort for each delegated task, add this to the preset's tool-subagent config:
+Since **1.2.1**, J-Space spawn subagents already set `modelSelectionSettings: true`; there is no need to add it manually. This enables integration with host settings, not unrestricted access to every model.
 
-    config:
-      provider: spawn
-      toolName: subagent
-      modelSelectionSettings: true
-      backgroundMode: continuable
+Open **Plugins → Subagent → Model selection** in DSH Web Settings, enable **Allow agents to choose models for Subagents**, and select permitted routes from the current DSH model catalog. Start a new session for the setting to take effect.
 
-Then open **Plugins → Subagent → Model selection** in DSH Web Settings, enable **Allow agents to choose models for Subagents**, and select permitted routes from the current DSH model catalog. Start a new session for the setting to take effect.
+Routes come from each DSH deployment's own model catalog and authorization list; J-Space hardcodes no provider or model IDs. Select newly added routes in Subagent settings when needed. DSH fork subagents inherit the parent session's model by design.
 
-Routes come from each DSH deployment's own model catalog and authorization list; J-Space hardcodes no provider or model IDs. Select newly added routes in Subagent settings when needed. This option requires the Host composition to load @deepseek-ai/dsh-tool-subagent/model-selection-settings; leave modelSelectionSettings unset in profiles without that Host plugin. The setting applies to new sessions. DSH fork subagents inherit the parent session's model by design.
+### 2. Host requirements for custom / headless profiles
 
-### 2. In DeepSeek Harness CLI
-```bash
-dsh --preset j-space "Analyze this architecture and implement feature X"
-```
+The default preset requires the Host to load `@deepseek-ai/dsh-tool-subagent/model-selection-settings`, supplied by the DSH Web application bundle. A host without this plugin fails to mount the preset rather than silently downgrading.
 
-### 3. In Cordis Composition (`cordis.yml`)
+For such a host, explicitly compose the settings plugin or remove / disable the spawn subagent's `modelSelectionSettings` field in your own preset override. Follow your DSH profile's documentation for preset selection and launch arguments; do not assume the old `dsh --preset j-space` example still applies.
+
+### 3. Legacy standalone Cordis plugin (migration reference only)
+
 ```yaml
 - id: j-space-plugin
   name: '@anonyjcy/dsh-j-space'
@@ -153,15 +155,18 @@ dsh --preset j-space "Analyze this architecture and implement feature X"
     autoDeploy: true
 ```
 
+This composition only invokes the legacy file-deployment plugin; it is not a preset registration method for DSH 0.2.0. Use the bundle installation above for the current version.
+
 ---
 
 ## 🧩 Architecture & Data Flow
 
 ```mermaid
 flowchart TD
-    A[New Session] --> B[Select j-space Preset]
-    B --> C[Preset Discovery: AgentPresets.list]
-    C --> D[Preset Mount: AgentPresets.mount]
+    P[Profile Loads Bundle Patch] --> R[Register j-space Preset Declaration]
+    R --> A[New Session]
+    A --> B[Select j-space Preset]
+    B --> D[Mount Preset Tools and Skills]
     D --> E[Agent Scope]
     E --> F1[Persona: J-Space SV1 Architecture]
     E --> F2[Tools: Full Coding & Reasoning Tools]
@@ -174,7 +179,9 @@ flowchart TD
 
 ---
 
-## 🛠️ CLI Commands
+## 🛠️ Legacy file-deployment CLI (migration reference only)
+
+These commands remain in the package and manage the legacy copy at `$DSH_HOME/.agent-presets/j-space` (default: `~/.dsh/.agent-presets/j-space`). `status` / `verify` only check those files; they **do not verify that a DSH 0.2.0 bundle is loaded or its preset registered**. Check the new-session preset menu in the current Web profile instead.
 
 ```bash
 node bin/cli.js install    # Deploy J-Space preset to ~/.dsh/.agent-presets/j-space
@@ -187,7 +194,7 @@ node bin/cli.js status     # Display current installation status
 
 ## 📄 License
 
-MIT License. See [LICENSE](./LICENSE) and [THIRD_PARTY_NOTICES.md](./preset/skills/j-space/THIRD_PARTY_NOTICES.md).
+MIT License. See [LICENSE](./LICENSE). For the J-Space suite's source and author information, see the [upstream project](https://github.com/Tiger3807861189/J-Space-Cognition-Suite).
 
 ## Maintenance
 
