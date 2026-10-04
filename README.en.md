@@ -11,13 +11,14 @@
 
 ---
 
-> **Current target: DSH 0.2.0; project version: 1.2.2.** Registers `j-space` through a native bundle patch and aligns its tool configuration with that version's Web `standard` preset. The default composition targets a Web profile with the subagent model-selection settings plugin; see the host requirements below for custom or headless profiles.
+> **Current target: DSH 0.2.0; project version: 1.2.3.** Registers `j-space` through a native bundle patch and aligns its tool configuration with that version's Web `standard` preset. The default composition targets a Web profile with the subagent model-selection settings plugin; see the host requirements below for custom or headless profiles.
 
 ### DSH 0.2.0 adaptation highlights
 
 - **1.2.0: native preset registration**. The `@deepseek-ai/dsh-agent-preset` declaration in [cordis.patch.yml](./cordis.patch.yml) registers the preset, with skills resolved relative to the package and no separate deployment step. Since DSH 0.1.7, `$DSH_HOME/.agent-presets/` is no longer scanned; copying files with the legacy CLI does not register a preset in 0.2.0.
 - **1.2.1: standard tool composition**. Adds the `/goal` command and `present` deliverable tool, and sets `modelSelectionSettings: true` by default. The plugin-manager tool row remains disabled, matching the standard preset.
 - **1.2.2: aligned defaults**. Enables `web_fetch` alongside `web_search` and explicitly disables Ralph. Keeps the J-Space-specific persona and skill directory.
+- **1.2.3: development checks and legacy plugin lifecycle**. Adds Node.js type declarations and `pnpm run typecheck`; fixes the standalone plugin's file deployment, which waited for a `ready` event that Cordis 4 no longer emits. Native bundle registration is unchanged.
 
 Historical adaptations for the DSH 0.1.5 persona schema and 0.1.6 `dsh-workflow-ptc` are recorded in [CHANGELOG.md](./CHANGELOG.md); they do not imply that the current 1.2.x release supports every older host.
 

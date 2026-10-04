@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.2.3
+
+### Fixed
+- The legacy standalone Cordis plugin now performs deployment during async
+  plugin application instead of waiting for `ready`, which Cordis 4.0.2 does
+  not emit. Deployment also works when mounted into an already active host.
+  This deploys legacy files only; DSH 0.2.0 preset registration still comes
+  from the bundle patch, which is unchanged.
+- Added the missing `@types/node` development dependency so TypeScript can
+  resolve Node built-ins and `process` without relying on host dependencies.
+
+### Added
+- `pnpm run typecheck` runs `tsc --noEmit`.
+- Five regression tests using a real Cordis context and temporary filesystem
+  cover initial and late mounting, `autoDeploy: false`, preservation of an
+  existing preset, and deployment-error logging.
+
 ## 1.2.2 — 2026-09-30
 
 ### Fixed

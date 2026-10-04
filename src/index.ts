@@ -30,25 +30,26 @@ export interface Config {
 
 /**
  * Apply the J-Space plugin to a Cordis Context.
- * Ensures the J-Space preset is available in the DSH environment.
+ * Deploys the legacy preset files if missing; DSH 0.2.0 registration is
+ * handled separately by the package's bundle patch.
  * @param ctx - Cordis context.
  * @param config - plugin configuration.
  */
-export function apply(ctx: Context, config: Config = {}): void {
+export async function apply(ctx: Context, config: Config = {}): Promise<void> {
   const autoDeploy = config.autoDeploy ?? true
   if (!autoDeploy) return
 
-  ctx.on('ready', async () => {
-    try {
-      const installed = await isJSpacePresetInstalled()
-      if (!installed) {
-        await installJSpacePreset()
-        ctx.logger.info('J-Space Cognition Suite SV1 preset deployed to DSH user presets directory.')
-      }
-    } catch (error) {
-      ctx.logger.warn(`Failed to auto-deploy J-Space preset: ${String(error)}`)
+  // Cordis awaits async plugin application, including mounts in an active host.
+  // It does not emit the old `ready` event in Cordis 4.
+  try {
+    const installed = await isJSpacePresetInstalled()
+    if (!installed) {
+      await installJSpacePreset()
+      ctx.logger.info('J-Space Cognition Suite SV1 preset deployed to DSH user presets directory.')
     }
-  })
+  } catch (error) {
+    ctx.logger.warn(`Failed to auto-deploy J-Space preset: ${String(error)}`)
+  }
 }
 
 export default {

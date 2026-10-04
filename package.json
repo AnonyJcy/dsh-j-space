@@ -1,6 +1,6 @@
 {
   "name": "@anonyjcy/dsh-j-space",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "J-Space Cognition Suite SV1 native Agent Preset and standalone plugin for DeepSeek Harness",
   "author": "anonyjcy",
   "license": "MIT",
@@ -61,10 +61,12 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.2",
+    "@types/node": "^22.20.5",
     "typescript": "^5.8.0",
     "vitest": "^4.1.0"
   },
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "status": "node bin/cli.js status",
     "install:preset": "node bin/cli.js install",

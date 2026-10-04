@@ -11,13 +11,14 @@
 
 ---
 
-> **当前适配：DSH 0.2.0，项目版本 1.2.2。** 通过原生 bundle patch 注册 `j-space` 预设，并对齐该版本 Web 应用的 `standard` 预设工具配置。默认面向加载了子代理模型选择设置插件的 Web profile；自定义或 headless profile 的宿主要求见下文。
+> **当前适配：DSH 0.2.0，项目版本 1.2.3。** 通过原生 bundle patch 注册 `j-space` 预设，并对齐该版本 Web 应用的 `standard` 预设工具配置。默认面向加载了子代理模型选择设置插件的 Web profile；自定义或 headless profile 的宿主要求见下文。
 
 ### DSH 0.2.0 适配要点
 
 - **1.2.0：原生预设注册**。通过 [cordis.patch.yml](./cordis.patch.yml) 中的 `@deepseek-ai/dsh-agent-preset` 声明注册预设，技能目录随包解析，无需额外部署。DSH 自 0.1.7 起不再扫描 `$DSH_HOME/.agent-presets/`，旧 CLI 复制文件的方式不能在 0.2.0 中注册预设。
 - **1.2.1：补齐标准工具配置**。加入 `/goal` 命令和 `present` 交付工具，默认配置 `modelSelectionSettings: true`；插件管理工具行与标准预设一致，保持禁用。
 - **1.2.2：对齐默认行为**。启用 `web_fetch`（同时保留 `web_search`），显式禁用 Ralph。保留 J-Space 专属 persona 与技能目录。
+- **1.2.3：修复开发检查与旧版插件生命周期**。补齐 Node.js 类型声明，增加 `pnpm run typecheck`，修复独立插件在 Cordis 4 中等待不再触发的 `ready` 事件、导致文件部署不执行的问题。原生 bundle 注册方式保持不变。
 
 历史上的 DSH 0.1.5 persona schema 与 0.1.6 `dsh-workflow-ptc` 适配记录见 [CHANGELOG.md](./CHANGELOG.md)；它们不代表当前 1.2.x 仍支持所有旧版宿主。
 
