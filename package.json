@@ -1,9 +1,9 @@
 {
   "name": "@anonyjcy/dsh-j-space",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "J-Space Cognition Suite SV1 native Agent Preset and standalone plugin for DeepSeek Harness",
   "author": "anonyjcy",
-  "license": "MIT",
+  "license": "(MIT AND Apache-2.0)",
   "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -41,6 +41,9 @@
     "src",
     "bin",
     "preset",
+    "vendor/j-space",
+    "tools/upstream_integrity.py",
+    "NOTICE.md",
     "cordis.patch.yml",
     "README.md",
     "README.en.md",
@@ -57,17 +60,24 @@
     "cordis-plugin"
   ],
   "peerDependencies": {
-    "@deepseek-ai/cordis": ">=3.0.0"
+    "@deepseek-ai/cordis": ">=4.0.2 <5 || ~4.0.5-alpha.1"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/cordis": "4.0.5-alpha.2",
     "@types/node": "^22.20.5",
     "typescript": "^5.8.0",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "yaml": "^2.9.1"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:controller": "python3 -B tests/dsh-cognition-contract.test.py",
+    "test:integrity": "python3 -B preset/skills/j-space/scripts/verify_suite.py && python3 -B tools/upstream_integrity.py verify --runtime preset/skills/j-space --adapters vendor/j-space/adapters.json",
+    "test:lossless": "python3 -B tests/upstream-integrity.test.py",
+    "test:upstream": "python3 -B tests/run-upstream-tests.py",
+    "test:host": "node tests/dsh-host-compat.mjs",
+    "test:install": "node tests/dsh-install-smoke.mjs",
     "status": "node bin/cli.js status",
     "install:preset": "node bin/cli.js install",
     "uninstall:preset": "node bin/cli.js uninstall",

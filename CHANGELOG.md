@@ -1,5 +1,83 @@
 # Changelog
 
+## 1.2.4 — 2026-10-15
+
+### Compatibility
+- Targets DSH `0.2.1-alpha.3` with Cordis `4.0.5-alpha.2`. On this date, DSH's
+  npm `alpha` tag is `0.2.1-alpha.3`, while `latest` remains `0.2.0-rc.2`;
+  stable `0.2.1` is not published. Installation examples explicitly select the
+  prerelease rather than treating `latest` as the newest alpha.
+- Verified alpha.3 through fresh isolated native CLI installation of the npm
+  tarball, real Loader activation of all 22 enabled preset rows, scoped skill
+  discovery/body loading, and actual host Team services OFF/ON. Exact standard
+  composition parity and official patch application pass with no composition
+  warnings. No provider/model, real Team turns, browser, or scheduled-delivery
+  end-to-end run is claimed; browser-only consumers remain intentionally pending
+  in the headless smoke.
+- A clean older npm `latest` (`0.2.0-rc.2`) lacks `dsh-tool-schedule` and fails
+  complete preset activation. Upgrade explicitly to the validated alpha.3;
+  this release does not claim compatibility with that older default composition.
+- Adds official `time-context` and `tool-schedule` rows from the standard
+  preset. Cordis peer compatibility must admit the actual host prerelease;
+  targeting a version alone does not establish a successful runtime mount.
+
+### Fixed
+- Resolves the skill directory through installed package metadata from the native
+  profile. DSH evaluates bundle `!!js` against the profile root, not the original
+  bundle directory; treating it as bundle-relative silently hid the J-Space skill.
+  Adds a separate-profile regression including spaces and URL-special characters.
+- Aligns plan-mode approval wording with the actual alpha.3 standard preset.
+
+### Changed
+- **Official Agent Teams owns direct delegation.** Removes all preset-local
+  subagent, fork, control, list-agents, disabled external-provider and Ralph
+  rows from both bundle and legacy compositions. The official Team profile
+  only disables top-level rows and cannot replace preset-local registrations.
+- Keeps the official isolated workflow engine and tools for explicitly requested
+  batch workflows; their one-shot children are not Team members.
+- Preserves original J-Space cognition/orchestration evidence and applies an explicit
+  DSH authority overlay. Local participant identities, bounds, reports and retirements
+  are evidence protocol state, not a competing Team roster or execution lifecycle.
+  Original second consideration and independent report acceptance remain required;
+  xhigh without authorized available delegation needs a truthful solo limitation.
+- Documents opt-in official Team installation, single-agent fallback, and reset
+  of saved preset composition overrides. No automatic installation or host/profile
+  migration; no subagent model-selection-settings dependency remains.
+- Corrects README orchestration summaries: actual delegated evidence participants
+  still require their own reads, second consideration and independent acceptance.
+  Host Team ownership does not make these original cognitive gates optional.
+- Replaces wrapper benchmark tables with two upstream report links and explicit
+  author-reported/unverified limitations. No adaptation capability, speed or
+  token-efficiency measurements are claimed; canonical upstream READMEs remain intact.
+- Clarifies MIT wrapper / Apache-2.0 upstream licensing and separate third-party
+  rights boundaries. Attribution or archival does not establish permission to redistribute.
+- Distinguishes checkout-only development tests from the packaged integrity utility
+  available to npm users.
+
+### Full-fidelity upstream restoration and lossless source retention
+- Pins official upstream commit b2023124a1fa08278e3ee82aefa8ed9faeade995.
+  Restores all 13 full modules, seven references, induction/drills, examples,
+  first-person operating frame, default high/xhigh controller, and original scripts.
+  The 25 non-entry files are byte-identical; the entry has a removable authority block.
+- Retains verbatim premise recurrence and scheduled full source reinjection, including
+  unchanged bodies. Restores original evidence participant reads, round-two reports,
+  independent exact-report acceptance, current dependencies, and original verifier.
+  Supersedes the unpublished aggressive slimming and its incompatible test assertions.
+- Adds a deterministic canonical compressed source archive, pinned hash manifest,
+  bounded safe reconstruction, runtime/adapter boundary verification, and original
+  upstream test fixtures. Compression concerns storage only, not prompt tokens or
+  guaranteed cognitive performance; the extra provenance archive is not a net package
+  size reduction claim. Retains Apache license and third-party materials notices.
+
+### Added
+- Parsed YAML regression tests covering bundle/legacy parity, platform shell
+  selection, official tool defaults and absence of preset-local team controls.
+- Python regressions for original cognition acceptance under official DSH authority;
+  `test:controller`, `test:integrity`, `test:lossless` and `test:upstream` scripts.
+- Optional read-only `test:host <host-node_modules>` check using the installed
+  official YAML dialect and patch engine, including Team on/off and Cordis peer
+  compatibility. It does not mount live Agents or change a profile.
+
 ## 1.2.3
 
 ### Fixed

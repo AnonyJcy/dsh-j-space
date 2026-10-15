@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "upstreamCommit": "b2023124a1fa08278e3ee82aefa8ed9faeade995",
+  "files": {
+    "SKILL.md": {
+      "sha256": "b4d275afb45b35b92d88f76b228268b26a530bee87a73b464d320600779b8c4e",
+      "notice": "DSH-owned bounded host-authority insertion after title; all original bytes retained verbatim outside this removable block."
+    },
+    "integration/dsh.md": {
+      "sha256": "a975dbe27cdcdec7157f55016d1b58fc1bb061d0803251f2a101f71cd0f6994b",
+      "notice": "DSH-owned additive host-authority mapping; no original cognitive file replaced."
+    }
+  }
+}

@@ -30,7 +30,7 @@ export interface Config {
 
 /**
  * Apply the J-Space plugin to a Cordis Context.
- * Deploys the legacy preset files if missing; DSH 0.2.0 registration is
+ * Deploys the legacy preset files if missing; DSH 0.2.1 registration is
  * handled separately by the package's bundle patch.
  * @param ctx - Cordis context.
  * @param config - plugin configuration.

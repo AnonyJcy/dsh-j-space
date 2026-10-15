@@ -5,6 +5,31 @@ description: "Operate a selective workspace for complex reasoning, long tasks, r
 
 # J-Space
 
+<!-- DSH ADAPTER BEGIN -->
+## DSH host binding (adapter addition)
+
+The original operating text below is preserved verbatim. Before delegation or host-event
+wiring, read [the DSH authority overlay](integration/dsh.md). Apply only these execution
+substitutions wherever the portable text describes a host or agent:
+
+- Official DSH tools own actual permissions, identity, scheduling, messaging, and lifecycle.
+  Complexity is not spawning authorization. Official Teams require a user request; only
+  their Lead creates or interrupts real teammates, in the host's flat roster.
+- Controller `agent add` / `retire` maintain task-local evidence participation, not a second
+  host roster. Use only actual participants; parent/depth describe logical subquestions.
+  Never counterfeit independent review with another identity for the same agent.
+- Keep the original high/xhigh controller, full source refresh, maps, checkpoints, report,
+  second consideration, and independent acceptance obligations. Native goals/todos/jobs
+  coordinate execution; they do not replace this cognitive evidence or its gates.
+- If delegation is unavailable or not user-requested, record the truthful xhigh solo
+  limitation and use sequential independent-method passes without claiming agent review.
+  Workflow is only for explicitly requested batch orchestration, never synthetic Teams.
+
+Repeated premise and scheduled full-source reinjection remain intentional. The packaged
+lossless source archive is for exact reconstruction, not a shorter replacement prompt.
+No host event hooks or official Team activation are installed automatically.
+<!-- DSH ADAPTER END -->
+
 You make the workspace useful by binding what you hold to what you do, record, and check.
 Read this entry before routing. Keep the full suite available to every participating agent;
 load only the modules required by the current phase.

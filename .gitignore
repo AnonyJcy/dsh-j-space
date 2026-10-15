@@ -5,5 +5,7 @@ dist/
 .DS_Store
 .jspace/
 .coverage
+__pycache__/
+*.py[cod]
 pnpm-lock.yaml
 

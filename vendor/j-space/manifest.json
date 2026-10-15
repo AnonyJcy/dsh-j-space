@@ -1,0 +1,201 @@
+{
+  "archive": {
+    "bytes": 165162,
+    "expandedBytes": 563200,
+    "format": "ustar+gzip",
+    "path": "canonical.tar.gz",
+    "sha256": "5733f52518180f2442af56cb82d83758fb5cf907479395e36780adc642ba1b35"
+  },
+  "files": [
+    {
+      "bytes": 1140,
+      "path": "CITATION.cff",
+      "sha256": "b97e85ff60967aa4cfc71b4c88a26ce4e0251af90339ee4e3e3cee4a63162b10"
+    },
+    {
+      "bytes": 11357,
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "bytes": 19501,
+      "path": "README.md",
+      "sha256": "605530fdb5f1cc3a2e60a3be9e08a537bcc9d6da7c6d26700827506da996f5d0"
+    },
+    {
+      "bytes": 17736,
+      "path": "README.zh-CN.md",
+      "sha256": "3aec4188ba79dc979480a61bc26a088fb412f0beec98b0dfc3a46e3735f54605"
+    },
+    {
+      "bytes": 5358,
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "fa22cee9b69ae0d6098089d5d0b8b628dda04a05c5d7a73ddb12b319165a6952"
+    },
+    {
+      "bytes": 12004,
+      "path": "j-space/SKILL.md",
+      "sha256": "2ccbcd13cafb5ce3e2669fd21480b917f662dca2cb38a6fa01806407a68e6c16"
+    },
+    {
+      "bytes": 10015,
+      "path": "j-space/modules/broadcast.md",
+      "sha256": "5c106a5dd4348ce92706ac05a761cf87fe2e8eed89f8c6b2e4436d5698e6773f"
+    },
+    {
+      "bytes": 14366,
+      "path": "j-space/modules/capacity.md",
+      "sha256": "1b98cd009e56895d5a03d9a789fc3a974ecc3939ce5ee0f3c8d388ac7d506065"
+    },
+    {
+      "bytes": 8837,
+      "path": "j-space/modules/cyber.md",
+      "sha256": "eeb8a8b2d1d77c4213d146717e4991d9e95cc386a2a28029dd5629395237bf06"
+    },
+    {
+      "bytes": 12025,
+      "path": "j-space/modules/deep-reasoning.md",
+      "sha256": "4200a929e189353ef773fccbdf1e8f12e2fa0ebdb1ff855e597dae66f980ae12"
+    },
+    {
+      "bytes": 9535,
+      "path": "j-space/modules/directed-focus.md",
+      "sha256": "a3afb08069c53f8e6b343c794ad73ea6743e693f33f00b09337ea2d5036be30f"
+    },
+    {
+      "bytes": 10410,
+      "path": "j-space/modules/empirics.md",
+      "sha256": "b84577add16e8f299b65c7062fa69c0556c3c81269e401bc52b72dbefb5acdef"
+    },
+    {
+      "bytes": 6262,
+      "path": "j-space/modules/epistemics.md",
+      "sha256": "0740895282ba6bc601f77b33c9ca254d810f4de614a03719e3d00aa7e8d80ed1"
+    },
+    {
+      "bytes": 10011,
+      "path": "j-space/modules/introspection.md",
+      "sha256": "e2f523333b9892909f409bf9d919087df35b6c9c73de523be8fe537a3abca3f4"
+    },
+    {
+      "bytes": 13099,
+      "path": "j-space/modules/markers.md",
+      "sha256": "be611e7ad1b0b3eadc79701cf3992ef19c31a36414bb8dadc6fe31c0dbf74b6d"
+    },
+    {
+      "bytes": 8613,
+      "path": "j-space/modules/orchestration.md",
+      "sha256": "e087983c020dc9bb8a33ac989716e07f0b3aa0330fc5ffeb87de1ed37c02867a"
+    },
+    {
+      "bytes": 7997,
+      "path": "j-space/modules/repository.md",
+      "sha256": "bcf89e9d8abbc23d0ac6011dd86b3520f4ff603360587c015e79083086858ec5"
+    },
+    {
+      "bytes": 15248,
+      "path": "j-space/modules/self-monitoring.md",
+      "sha256": "12a5e3e25a3483b5e05a8b735e5651cb6d1c45e18e01083406182d89e0330c3b"
+    },
+    {
+      "bytes": 14661,
+      "path": "j-space/modules/shorthand.md",
+      "sha256": "5e6697e06e95a44d9c80ee4d0eb597da543cd9bd130c5baaaafae9511e885029"
+    },
+    {
+      "bytes": 22759,
+      "path": "j-space/references/controller.md",
+      "sha256": "aaa93608e1f9fbbfdc49f77ec8e1ce82b6e4fb7071af0513a9665b187fb205b7"
+    },
+    {
+      "bytes": 8592,
+      "path": "j-space/references/engineering-evidence.md",
+      "sha256": "cf3e2505e40265ecafa998aa08c5d61f1d9cd72a18604cad2a65c9b687992a8a"
+    },
+    {
+      "bytes": 18986,
+      "path": "j-space/references/exemplars.md",
+      "sha256": "e5581c4055d71195dbd965b926cd51242bb7e54514721c52118f91c0c2bcfcf3"
+    },
+    {
+      "bytes": 6089,
+      "path": "j-space/references/host-integration.md",
+      "sha256": "c94a1e7746335311b75b5e4d4d11396eb3d2946d8e23d6918449bb59ff177429"
+    },
+    {
+      "bytes": 22054,
+      "path": "j-space/references/induction-playbook.md",
+      "sha256": "94689c1c9bf2f9637397092c6a957e4c78819c083d83093135ad13436903f331"
+    },
+    {
+      "bytes": 37325,
+      "path": "j-space/references/j-space-science.md",
+      "sha256": "98d2921ef7355c629d3f46544cf0013b69e104fafa823fa8cf1fa90c38b8f050"
+    },
+    {
+      "bytes": 2850,
+      "path": "j-space/references/problem-model.md",
+      "sha256": "5d65f9c99d88ab5ba0fb894bf9319ddf65e2725c5ec062a0672204bc196b76da"
+    },
+    {
+      "bytes": 50382,
+      "path": "j-space/scripts/control.py",
+      "sha256": "53fe5bbec9af9a0b94d2ea8de78b901679e0bf8fe8d69a31af07d3b6a52c59f4"
+    },
+    {
+      "bytes": 3297,
+      "path": "j-space/scripts/host_bridge.py",
+      "sha256": "68ac1d094f82866574ef7256e4d9219a5d9db5a5b4b7b635bdf04d123aebbbe3"
+    },
+    {
+      "bytes": 36808,
+      "path": "j-space/scripts/jspace.py",
+      "sha256": "d2df21d9d49b21d0f05c6ef351a89879f5a45331ccede91406374cd040aca594"
+    },
+    {
+      "bytes": 12607,
+      "path": "j-space/scripts/verify_suite.py",
+      "sha256": "3d092db89114be456ceb2a0f55de9e82464a18caa2e5b9fbb5d0daccb10cb4a5"
+    },
+    {
+      "bytes": 4089,
+      "path": "j-space/scripts/workspace-ledger.md",
+      "sha256": "79e6d67d44d5834258c4dd57cb9b1e4c00ed1b9884fd7083bf069da4b5e3e12a"
+    },
+    {
+      "bytes": 36879,
+      "path": "tests/test_control.py",
+      "sha256": "08a7ed569e610c6a4da40b5f7796b993ec2c917aa0bc4c469d33d19f5a92df56"
+    },
+    {
+      "bytes": 4969,
+      "path": "tests/test_host_bridge.py",
+      "sha256": "147198afc95a699a96a644db86c73392833a6a2fb662de2e218af1f9c6f00cab"
+    },
+    {
+      "bytes": 3361,
+      "path": "tests/test_integrity.py",
+      "sha256": "64213a14582acf02a4b9056d23d4f5c67ea15447bb8b18a1fc4cf0f7e7960d47"
+    },
+    {
+      "bytes": 34391,
+      "path": "tests/test_jspace.py",
+      "sha256": "f428348fd699e17bd90104e18cf7d6061b6848eb6611f8ead96395330032b6cd"
+    },
+    {
+      "bytes": 4934,
+      "path": "tests/test_readme_workflow.py",
+      "sha256": "294dfd6b81bba89b85e8987013f87a81363a897def3252deb336ed504e965540"
+    },
+    {
+      "bytes": 5274,
+      "path": "tests/test_security_workflow.py",
+      "sha256": "3272d3b40828cabd07ebbeb1523bec6bd9f63110062cdd8165b536be4990c365"
+    }
+  ],
+  "schema": 1,
+  "upstream": {
+    "commit": "b2023124a1fa08278e3ee82aefa8ed9faeade995",
+    "repository": "https://github.com/Tiger3807861189/J-Space-Cognition-Suite"
+  }
+}

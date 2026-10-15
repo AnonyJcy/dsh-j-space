@@ -1,0 +1,30 @@
+# CITATION.cff — machine-readable citation metadata
+# GitHub shows a "Cite this repository" button when this file exists.
+# Format: Citation File Format 1.2.0 (https://citation-file-format.github.io/)
+
+cff-version: 1.2.0
+message: "If you use J-Space in research, please cite this software and use the concept DOI below. Cite a fixed release DOI when a matching SV1 archive is published."
+title: "J-Space Cognition Suite SV1"
+authors:
+  - name: "Tiger3807861189"
+version: "SV1"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21971181"
+    description: "Concept DOI for all releases"
+license: "Apache-2.0"
+keywords:
+  - "J-Space"
+  - "inference-time control"
+  - "AI agent"
+  - "cognitive enhancement"
+  - "global workspace"
+  - "dsh-plugin"
+  - "skill"
+url: "https://github.com/Tiger3807861189/J-Space-Cognition-Suite"
+repository-code: "https://github.com/Tiger3807861189/J-Space-Cognition-Suite"
+abstract: >-
+  A model-agnostic inference-time control suite for deep reasoning,
+  long-horizon work, tool use, verification, and recovery. Based on
+  Anthropic's J-space global workspace research. Licensed under
+  Apache License 2.0.
