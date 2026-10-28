@@ -62,6 +62,7 @@ const yaml = hostRequire('js-yaml')
 const { entryListSchema } = await importHost('@deepseek-ai/cordis-plugin-include')
 const parse = source => yaml.load(source, { schema: entryListSchema })
 const flatten = entries => entries.flatMap(entry => [entry, ...(entry.group ? flatten(entry.config ?? []) : [])])
+// Host releases before 0.2.2 dropped list-agents entirely; only check rows the host has.
 const direct = ['tool-subagent-control', 'tool-subagent-list-agents', 'tool-subagent', 'tool-subagent-fork']
 function checkDump(team) {
   const rows = parse(cli(['--profile', 'web', '--dump-config'], team ? 'dump-team-on' : 'dump-team-off'))
@@ -75,7 +76,10 @@ function checkDump(team) {
   for (const id of ['agent-team', 'tool-agent-team', 'ui-agent-team']) {
     assert.equal(all.filter(row => row.id === id && !row.disabled).length, team ? 1 : 0, `${id} opt-in state`)
   }
-  if (team) for (const id of direct) assert.equal(all.find(row => row.id === id)?.disabled, true, `${id} disabled by Team`)
+  if (team) for (const id of direct) {
+    const row = all.find(candidate => candidate.id === id)
+    if (row) assert.equal(row.disabled, true, `${id} disabled by Team`)
+  }
   // Core tools are present only once within this agent's standing composition;
   // other shipped presets are intentionally separate capabilities, not duplicates.
   for (const id of ['tool-bash', 'tool-fs', 'tool-fs-search', 'tool-jobs', 'tool-skill', 'tool-workflow']) {

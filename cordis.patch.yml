@@ -1,4 +1,4 @@
-# @anonyjcy/dsh-j-space — DSH 0.2.1 preset bundle patch (validated on 0.2.1-alpha.3).
+# @anonyjcy/dsh-j-space — DSH 0.2.1 preset bundle patch (validated on 0.2.1-rc.4).
 #
 # A preset is a declaration row carried by a bundle patch. Since DSH 0.1.7 nothing
 # reads `$DSH_HOME/.agent-presets/`, so the previous shape of this file — a row
@@ -199,6 +199,13 @@
 
           - id: tool-plugin-manager
             name: '@deepseek-ai/dsh-plugin-manager/tools'
+            disabled: true
+
+          # Kept from the DSH 0.2.1 RC standard preset and disabled like the manager
+          # tool. It is not mounted outside the Web profile, and leaving the row out
+          # would silently drop a row the host standard still declares.
+          - id: tool-plugin-market
+            name: '@deepseek-ai/dsh-plugin-market/tools'
             disabled: true
 
           - id: tool-web

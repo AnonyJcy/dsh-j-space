@@ -14,13 +14,13 @@ J-Space 本身由上游项目维护，这个仓库负责 DSH 适配。
 
 ## 安装
 
-1.2.4 的验证环境是 **DSH 0.2.1-alpha.3 / Cordis 4.0.5-alpha.2**。下面固定使用这个 DSH 版本，不依赖 npm 标签的指向。旧的 `0.2.0-rc.2` 缺少本预设需要的定时工具，不能完整加载，请先升级。
+1.2.5 的验证环境是 **DSH 0.2.1-rc.4 / Cordis 4.0.5**，另外在 `0.2.1-rc.3` 和 `0.2.2-alpha.2`（Cordis `4.0.6-alpha.1`）上验证过安装和预设加载。下面固定使用 rc.4 这个版本，不依赖 npm 标签的指向；`next` 标签现在也指向它，而 `latest` 仍是较早的 `0.2.1-rc.2`。更旧的 `0.2.0-rc.2` 缺少本预设需要的定时工具，不能完整加载，请先升级。
 
 ```bash
 # 已使用对应 DSH 版本时，可以跳过这一条
-npm install -g @deepseek-ai/dsh@0.2.1-alpha.3
+npm install -g @deepseek-ai/dsh@0.2.1-rc.4
 
-dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.4
+dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.5
 ```
 
 已有 DSH 部署时，请在启动该部署的安装环境中升级，并先备份自定义配置。使用自定义 profile 的话，把 `web` 换成实际名称。
@@ -47,7 +47,7 @@ DSH 通过 [bundle 配置](<cordis.patch.yml>) 注册预设，技能直接读取
 需要团队功能时，在同一个 profile 安装官方插件：
 
 ```bash
-dsh plugin --profile web add @deepseek-ai/dsh-experimental-agent-team-profile@0.2.1-alpha.3
+dsh plugin --profile web add @deepseek-ai/dsh-experimental-agent-team-profile@0.2.1-rc.4
 ```
 
 创建成员、发消息、分配任务和管理成员生命周期，都交给官方插件。J-Space 预设不再单独注册 `subagent`、`fork` 和成员控制工具，也不会自动启用团队；只有用户明确要求时才创建团队。不装团队插件，也可以单智能体使用。
@@ -104,11 +104,11 @@ pnpm run test:upstream
 另行安装隔离的 DSH 宿主后，可以检查官方配置和真实安装流程：
 
 ```bash
-pnpm run test:host /path/to/isolated-host/node_modules 0.2.1-alpha.3
-pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.1-alpha.3
+pnpm run test:host /path/to/isolated-host/node_modules 0.2.1-rc.4
+pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.1-rc.4
 ```
 
-安装测试只创建新的临时 profile，不会修改正在使用的配置。1.2.4 已验证原生安装、预设与技能加载，以及官方团队开关两种配置；没有做模型 A/B、真实团队对话、浏览器操作或定时投递测试。
+安装测试只创建新的临时 profile，不会修改正在使用的配置。1.2.5 已在 rc.3、rc.4 和 `0.2.2-alpha.2` 上验证原生安装、预设与技能加载，以及官方团队开关两种配置；没有做模型 A/B、真实团队对话、浏览器操作或定时投递测试。
 
 ## 相关评测
 

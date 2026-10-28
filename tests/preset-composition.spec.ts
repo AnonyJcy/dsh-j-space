@@ -48,9 +48,9 @@ function skillDirectory(entries: Entry[], baseUrl: URL) {
   return resolve(Function('process', 'baseUrl', `return ${expression}`)(process, baseUrl))
 }
 
-describe('DSH 0.2.1 J-Space preset composition', () => {
-  it('declares version 1.2.4 and exactly one native preset with packaged skills', () => {
-    expect(manifest.version).toBe('1.2.4')
+describe('DSH 0.2.1 RC and 0.2.2 J-Space preset composition', () => {
+  it('declares version 1.2.5 and exactly one native preset with packaged skills', () => {
+    expect(manifest.version).toBe('1.2.5')
     expect(bundle).toHaveLength(1)
     expect(bundle[0].insert).toHaveLength(1)
     expect(declaration.id).toBe('preset-j-space')
@@ -112,6 +112,8 @@ describe('DSH 0.2.1 J-Space preset composition', () => {
     expect(row('command-goal').name).toBe('@deepseek-ai/dsh-command-goal')
     expect(row('present').name).toBe('@deepseek-ai/dsh-tool-present')
     expect(row('tool-plugin-manager').disabled).toBe(true)
+    expect(row('tool-plugin-market').name).toBe('@deepseek-ai/dsh-plugin-market/tools')
+    expect(row('tool-plugin-market').disabled).toBe(true)
     expect(row('planning').isolate).toEqual({ planMode: true })
     expect(row('compaction').isolate).toEqual({ compaction: true, toolResultPruner: true })
   })

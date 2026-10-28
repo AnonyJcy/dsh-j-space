@@ -28,23 +28,49 @@ const warnings = []
 const warn = (...args) => warnings.push(args)
 const preset = jspacePatch[0].insert[0]
 const plugins = preset.config.plugins
+// Host releases before 0.2.2 dropped list-agents from the standard preset; keep it
+// optional so the same parity contract covers both the RC line and the 0.2.2 alpha.
 const removed = ['tool-subagent-control', 'tool-subagent-list-agents', 'tool-subagent', 'tool-subagent-fork']
+const bundleSkillExpression = "process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(new URL('package.json', baseUrl)).resolve('@anonyjcy/dsh-j-space/package.json')), 'preset/skills')"
 const flatten = entries => entries.flatMap(entry => [entry, ...(entry.group ? flatten(entry.config ?? []) : [])])
 const all = flatten(plugins)
 assert(all.every(entry => !/subagent|ralph|agent-team/.test(entry.name)), 'No preset-owned Team/direct delegation tools')
+// Persona and packaged skill directory are J-Space's own; the preset-manager gate
+// is a host-version-specific profile expression. Those rows are owned locally, so
+// they are compared by presence and identity rather than against host defaults.
+const owned = ['persona', 'skill-filesystem', 'tool-plugin-manager']
 
 // All official standard rows are retained apart from the intentional Team split.
-const expected = structuredClone(standardPatch[0].insert[0].config.plugins)
-expected.find(entry => entry.id === 'delegation').config = expected.find(entry => entry.id === 'delegation').config.filter(entry => !removed.includes(entry.id))
-expected.find(entry => entry.id === 'persona').config = plugins.find(entry => entry.id === 'persona').config
-expected.find(entry => entry.id === 'skill-filesystem').config = plugins.find(entry => entry.id === 'skill-filesystem').config
+const officialPlugins = standardPatch[0].insert[0].config.plugins
+const officialDelegation = officialPlugins.find(entry => entry.id === 'delegation')
+for (const id of removed) {
+  if (!officialDelegation.config.some(entry => entry.id === id)) {
+    assert(!flatten(plugins).some(entry => entry.id === id), 'Row removed upstream must not be reintroduced: ' + id)
+  }
+}
+const expected = structuredClone(officialPlugins)
+expected.find(entry => entry.id === 'delegation').config = officialDelegation.config.filter(entry => !removed.includes(entry.id))
+for (const id of owned) expected.find(entry => entry.id === id).config = plugins.find(entry => entry.id === id).config
 const normalize = entries => flatten(entries).map(entry => {
   const result = structuredClone(entry)
   if (result.group) delete result.config
   if (result.id === 'plan-mode') result.config.section = result.config.section.trim()
+  if (owned.includes(result.id)) {
+    delete result.config
+    delete result.disabled
+  }
   return result
 }).sort((a, b) => a.id.localeCompare(b.id))
 assert.deepEqual(normalize(plugins), normalize(expected), 'Parity with actual DSH standard minus direct delegation')
+assert.deepEqual(
+  Object.fromEntries(owned.map(id => [id, flatten(plugins).find(entry => entry.id === id)?.config])),
+  {
+    persona: { suffix: 'Your working directory is {{cwd}}.', prefix: 'You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite SV1 architecture.' },
+    'skill-filesystem': { customSkillDirs: [{ __jsExpr: bundleSkillExpression }] },
+    'tool-plugin-manager': undefined,
+  },
+  'Locally owned rows keep their exact J-Space configuration',
+)
 const normalizedLegacy = structuredClone(legacy)
 normalizedLegacy.find(entry => entry.id === 'skill-filesystem').config = plugins.find(entry => entry.id === 'skill-filesystem').config
 assert.deepEqual(normalizedLegacy, plugins)
@@ -53,7 +79,10 @@ assert.deepEqual(normalizedLegacy, plugins)
 // therefore the absence of direct rows must hold BEFORE applying the Team patch.
 const withoutTeam = applyEntryPatches([], [...basePatch, ...webPatch, ...jspacePatch], warn)
 const withTeam = applyEntryPatches(withoutTeam, teamPatch, warn)
-for (const id of removed) assert.equal(flatten(withTeam).find(entry => entry.id === id).disabled, true)
+for (const id of removed) {
+  const row = flatten(withTeam).find(entry => entry.id === id)
+  if (row) assert.equal(row.disabled, true, id + ' disabled by the official Team layer')
+}
 assert.deepEqual(withTeam.find(entry => entry.id === 'preset-j-space').config.plugins, plugins)
 for (const id of ['agent-team', 'tool-agent-team', 'ui-agent-team']) {
   assert.equal(flatten(withTeam).filter(entry => entry.id === id).length, 1, id + ' composed exactly once')

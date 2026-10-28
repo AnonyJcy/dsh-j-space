@@ -165,6 +165,11 @@
   name: '@deepseek-ai/dsh-plugin-manager/tools'
   disabled: true
 
+# Kept from the DSH 0.2.1 RC standard preset and disabled like the manager tool.
+- id: tool-plugin-market
+  name: '@deepseek-ai/dsh-plugin-market/tools'
+  disabled: true
+
 - id: tool-web
   name: '@deepseek-ai/dsh-tool-web'
   config:

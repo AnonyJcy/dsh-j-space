@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.2.5 — 2026-10-28
+
+### Compatibility
+- Targets DSH `0.2.1-rc.4` with Cordis `4.0.5`. Also verified `0.2.1-rc.3` and
+  `0.2.2-alpha.2` (Cordis `4.0.6-alpha.1`). On this date the npm tags are
+  `latest` `0.2.1-rc.2`, `next` `0.2.1-rc.4`, `alpha` `0.2.2-alpha.2`; installation
+  examples pin rc.4 explicitly instead of trusting `latest`.
+- Widen the Cordis peer range to admit `~4.0.6-alpha.1`, which the `0.2.2` line
+  requires. Dev Cordis moves to `4.0.6-alpha.1`. No runtime dependency is added.
+- Each host version was checked through a fresh isolated native CLI installation
+  of the npm tarball, real Loader activation of all 22 enabled preset rows,
+  scoped skill discovery and body loading, and actual host Team services OFF/ON.
+  No provider/model, real Team turns, browser, or scheduled-delivery end-to-end
+  run is claimed; browser-only consumers remain intentionally pending headless.
+
+### Changed
+- Restores the disabled `tool-plugin-market` row that the 0.2.1 RC standard preset
+  declares, in both the bundle and legacy compositions.
+- The host parity check now compares against the actually installed standard
+  preset without hard-coding one release: rows the host removed must stay
+  removed, and the preset-manager gate, persona, and packaged skill directory are
+  verified as J-Space-owned rows with their exact local configuration. This keeps
+  the contract exact for a given host while admitting the documented 0.2.1 RC and
+  0.2.2 differences.
+- The installation smoke tolerates the `tool-subagent-list-agents` row that the
+  0.2.2 Team layer no longer ships, and still requires every direct-delegation row
+  present on the host to be disabled by the official Team layer.
+
+### Unchanged
+- Original J-Space modules, references, controller, evidence gates, verbatim
+  premise recurrence, and scheduled full-source reinjection remain intact. The
+  official Agent Teams boundary is unchanged: no preset-local subagent, fork,
+  Team, or Ralph rows, and isolated `workflow` stays for explicitly requested
+  batch orchestration.
+- Canonical upstream pin, archive contents, and integrity hashes are unchanged.
+
 ## 1.2.4 — 2026-10-15
 
 ### Compatibility
