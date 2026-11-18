@@ -13,11 +13,10 @@
 # ── identity ────────────────────────────────────────────────────────────────
 
 # The preset's own persona, shadowing the deployment default for this agent.
-# `{{model}}` and `{{cwd}}` resolve from the agent's own route and workspace.
+# The agent route supplies the model. DSH supplies the current directory as runtime context.
 - id: persona
   name: '@deepseek-ai/dsh-persona'
   config:
-    suffix: Your working directory is {{cwd}}.
     prefix: >-
       You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite SV1 architecture.
 
@@ -26,7 +25,7 @@
   config:
     maxBytes: 65536
 
-# Time context follows the DSH 0.2.1 standard preset.
+# Time context follows the DSH standard preset.
 - id: time-context
   name: '@deepseek-ai/dsh-time-context'
 
@@ -44,6 +43,8 @@
 
 - id: tool-fs
   name: '@deepseek-ai/dsh-tool-fs'
+  config:
+    applyPatch: false
 
 - id: tool-fs-search
   name: '@deepseek-ai/dsh-tool-fs-search'
@@ -161,11 +162,14 @@
 - id: present
   name: '@deepseek-ai/dsh-tool-present'
 
+- id: tool-office
+  name: '@deepseek-ai/dsh-tool-office'
+
 - id: tool-plugin-manager
   name: '@deepseek-ai/dsh-plugin-manager/tools'
   disabled: true
 
-# Kept from the DSH 0.2.1 RC standard preset and disabled like the manager tool.
+# Kept from the DSH standard preset and disabled like the manager tool.
 - id: tool-plugin-market
   name: '@deepseek-ai/dsh-plugin-market/tools'
   disabled: true

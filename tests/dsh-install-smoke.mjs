@@ -62,10 +62,8 @@ const yaml = hostRequire('js-yaml')
 const { entryListSchema } = await importHost('@deepseek-ai/cordis-plugin-include')
 const parse = source => yaml.load(source, { schema: entryListSchema })
 const flatten = entries => entries.flatMap(entry => [entry, ...(entry.group ? flatten(entry.config ?? []) : [])])
-// Host releases before 0.2.2 dropped list-agents entirely; only check rows the host has.
-const direct = ['tool-subagent-control', 'tool-subagent-list-agents', 'tool-subagent', 'tool-subagent-fork']
-function checkDump(team) {
-  const rows = parse(cli(['--profile', 'web', '--dump-config'], team ? 'dump-team-on' : 'dump-team-off'))
+function checkDump() {
+  const rows = parse(cli(['--profile', 'web', '--dump-config'], 'dump-config'))
   const all = flatten(rows)
   assert.equal(all.filter(row => row.id === 'preset-j-space').length, 1)
   const preset = all.find(row => row.id === 'preset-j-space')
@@ -74,11 +72,7 @@ function checkDump(team) {
   assert.equal(new Set(local.map(row => row.id)).size, local.length, 'No duplicate preset rows')
   assert(local.every(row => !/subagent|ralph|agent-team/.test(row.name)), 'Delegation/Team is exclusively host owned')
   for (const id of ['agent-team', 'tool-agent-team', 'ui-agent-team']) {
-    assert.equal(all.filter(row => row.id === id && !row.disabled).length, team ? 1 : 0, `${id} opt-in state`)
-  }
-  if (team) for (const id of direct) {
-    const row = all.find(candidate => candidate.id === id)
-    if (row) assert.equal(row.disabled, true, `${id} disabled by Team`)
+    assert.equal(all.filter(row => row.id === id && !row.disabled).length, 1, `${id} built-in host state`)
   }
   // Core tools are present only once within this agent's standing composition;
   // other shipped presets are intentionally separate capabilities, not duplicates.
@@ -88,10 +82,10 @@ function checkDump(team) {
   }
   return preset
 }
-checkDump(false)
+checkDump()
 
 const bootApi = await importHost('@deepseek-ai/dsh-app-boot')
-async function runtime(team) {
+async function runtime() {
   const installAnchor = hostPackage
   const profile = bootApi.loadProfile('jspace-smoke', 'web', installAnchor)
   assert.deepEqual(profile.skippedBundles, [], 'No incompatible or unresolved bundle skipped')
@@ -108,12 +102,12 @@ async function runtime(team) {
   try {
     assert.equal(ctx.get('webServer'), undefined, 'Smoke must never bind a Web listener')
     assert.equal(ctx.get('webStartup'), undefined, 'Smoke cannot invoke a real Web startup')
-    assert.equal(Boolean(ctx.get('agentTeams')), team, 'Real Team service follows native opt-in')
+    assert(ctx.get('agentTeams'), 'Built-in Team service mounted in the host')
     const hostRows = [...ctx.loader.entries()]
     for (const id of ['agent-team', 'tool-agent-team', 'ui-agent-team']) {
       const matching = hostRows.filter(row => row.options.id === id)
-      assert.equal(matching.length, team ? 1 : 0, `${id} mounted only by opted-in host layer`)
-      if (team) assert.equal(matching[0].fiber?.state, 2, `${id} is active in real Loader`)
+      assert.equal(matching.length, 1, `${id} mounted only by built-in host composition`)
+      assert.equal(matching[0].fiber?.state, 2, `${id} is active in real Loader`)
     }
     const registered = await ctx.agentPresets.resolve('j-space')
     assert(!registered.broken, `Preset activation failed: ${registered.broken}`)
@@ -136,7 +130,14 @@ async function runtime(team) {
       const definition = await ctx.skills.get('j-space', options)
       assert(definition?.content.includes('control.py'), 'Real host loads the complete controller skill')
       assert(!((await ctx.skills.list({ cwd: workspace })).some(skill => skill.name === 'j-space')), 'J-Space skill stays preset-scoped, not global')
-      console.log(JSON.stringify({ phase: 'runtime', team, preset: registered.id, activatedRows: composition.rows.filter(row => row.enabled === true).length, skill: jspace[0].path, skillBytes: Buffer.byteLength(definition.content) }))
+      const { renderPrompt } = await importHost('@deepseek-ai/dsh-system-prompt')
+      const assembly = await ctx.systemPrompt.assemble({
+        scope: scope.key,
+        modelSelection: { provider: 'fixture', model: 'jspace-smoke-model' },
+      })
+      const rendered = renderPrompt(assembly)
+      assert.match(rendered, /jspace-smoke-model.*J-Space Cognition Suite/)
+      console.log(JSON.stringify({ phase: 'runtime', preset: registered.id, activatedRows: composition.rows.filter(row => row.enabled === true).length, skill: jspace[0].path, skillBytes: Buffer.byteLength(definition.content) }))
     } finally {
       await scope[Symbol.asyncDispose]()
     }
@@ -144,10 +145,6 @@ async function runtime(team) {
     await ctx.fiber.dispose()
   }
 }
-await runtime(false)
-cli(['plugin', '--profile', 'web', 'add', `@deepseek-ai/dsh-experimental-agent-team-profile@${hostManifest.version}`], 'team-add')
-assert.equal(manifest().dsh.profile.bundles.filter(name => name === '@deepseek-ai/dsh-experimental-agent-team-profile').length, 1)
-checkDump(true)
-await runtime(true)
+await runtime()
 assert(!existsSync(join(env.DSH_HOME, '.agent-presets')), 'Native bundle integration must not depend on legacy preset auto-deployment')
-console.log(JSON.stringify({ ok: true, root, baseline: hostManifest.version, tarball, sha256: createHash('sha256').update(readFileSync(tarball)).digest('hex'), coverage: ['native plugin add of npm tarball', 'persisted dependency and bundle discovery', 'native config dump', 'real Loader preset activation', 'preset-scoped filesystem skill discovery and body loading', 'Team opt-in via native add', 'no preset duplicate core tools or direct delegation', 'headless boot with no network listener'], limits: ['no provider credentials', 'no model execution or model E2E', 'no browser interaction', 'no current GUI/profile mutation'] }, null, 2))
+console.log(JSON.stringify({ ok: true, root, baseline: hostManifest.version, tarball, sha256: createHash('sha256').update(readFileSync(tarball)).digest('hex'), coverage: ['native plugin add of npm tarball', 'persisted dependency and bundle discovery', 'native config dump', 'real Loader preset activation', 'preset-scoped filesystem skill discovery and body loading', 'built-in Team host composition', 'real scoped persona rendering', 'no preset duplicate core tools or direct delegation', 'headless boot with no network listener'], limits: ['no provider credentials', 'no model execution or model E2E', 'no browser interaction', 'no current GUI/profile mutation'] }, null, 2))

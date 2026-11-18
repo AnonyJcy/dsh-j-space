@@ -21,7 +21,6 @@ const own = relative => new URL(relative, root)
 const jspacePatch = parse(own('cordis.patch.yml'))
 const legacy = parse(own('preset/agent.cordis.yml'))
 const standardPatch = parse(join(host('dsh-web-app'), 'presets/standard.patch.yml'))
-const teamPatch = parse(join(host('dsh-experimental-agent-team-profile'), 'cordis.patch.yml'))
 const basePatch = parse(join(host('dsh-base'), 'cordis.patch.yml'))
 const webPatch = parse(join(host('dsh-web-app'), 'cordis.patch.yml'))
 const warnings = []
@@ -65,7 +64,7 @@ assert.deepEqual(normalize(plugins), normalize(expected), 'Parity with actual DS
 assert.deepEqual(
   Object.fromEntries(owned.map(id => [id, flatten(plugins).find(entry => entry.id === id)?.config])),
   {
-    persona: { suffix: 'Your working directory is {{cwd}}.', prefix: 'You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite SV1 architecture.' },
+    persona: { prefix: 'You are a coding agent powered by the {{model}} model, operating with the J-Space Cognition Suite SV1 architecture.' },
     'skill-filesystem': { customSkillDirs: [{ __jsExpr: bundleSkillExpression }] },
     'tool-plugin-manager': undefined,
   },
@@ -75,18 +74,12 @@ const normalizedLegacy = structuredClone(legacy)
 normalizedLegacy.find(entry => entry.id === 'skill-filesystem').config = plugins.find(entry => entry.id === 'skill-filesystem').config
 assert.deepEqual(normalizedLegacy, plugins)
 
-// Use the real official patch engine. The Team layer cannot visit config.plugins;
-// therefore the absence of direct rows must hold BEFORE applying the Team patch.
-const withoutTeam = applyEntryPatches([], [...basePatch, ...webPatch, ...jspacePatch], warn)
-const withTeam = applyEntryPatches(withoutTeam, teamPatch, warn)
-for (const id of removed) {
-  const row = flatten(withTeam).find(entry => entry.id === id)
-  if (row) assert.equal(row.disabled, true, id + ' disabled by the official Team layer')
-}
-assert.deepEqual(withTeam.find(entry => entry.id === 'preset-j-space').config.plugins, plugins)
+// DSH 0.2.2-rc.4 includes the Team runtime in the host composition.
+const composed = applyEntryPatches([], [...basePatch, ...webPatch, ...jspacePatch], warn)
+assert.deepEqual(composed.find(entry => entry.id === 'preset-j-space').config.plugins, plugins)
 for (const id of ['agent-team', 'tool-agent-team', 'ui-agent-team']) {
-  assert.equal(flatten(withTeam).filter(entry => entry.id === id).length, 1, id + ' composed exactly once')
-  assert(!withoutTeam.some(entry => entry.id === id), 'Team remains opt-in')
+  const rows = flatten(composed).filter(entry => entry.id === id && !entry.disabled)
+  assert.equal(rows.length, 1, id + ' composed exactly once by the host')
 }
 const workflow = all.find(entry => entry.id === 'delegation')
 assert.deepEqual(workflow.isolate, { workflowEngine: true })
@@ -96,11 +89,11 @@ assert.equal(preset.name, '@deepseek-ai/dsh-agent-preset')
 // Every coupled official package must still match; composition parity above is
 // deliberately exact so a newer host cannot silently weaken the contract.
 const baseline = process.argv[3] ?? manifest('dsh').version
-for (const name of ['dsh', 'dsh-web-app', 'dsh-experimental-agent-team-profile']) {
+for (const name of ['dsh', 'dsh-web-app', 'dsh-tool-agent-team']) {
   assert.equal(manifest(name).version, baseline, 'Verification baseline for ' + name)
 }
 const semver = hostRequire('semver')
 const ownManifest = JSON.parse(text(own('package.json')))
 assert(semver.satisfies(manifest('cordis').version, ownManifest.peerDependencies['@deepseek-ai/cordis']), 'Cordis peer admits the actual host prerelease without includePrerelease override')
 assert.equal(warnings.length, 0, 'Official composition must apply without missing patch targets')
-console.log(JSON.stringify({ ok: true, baseline: manifest('dsh').version, check: 'official YAML dialect and profile patch semantics; standard composition parity; Team on/off', warnings }, null, 2))
+console.log(JSON.stringify({ ok: true, baseline: manifest('dsh').version, check: 'official YAML dialect and profile patch semantics; standard composition parity; built-in Team', warnings }, null, 2))

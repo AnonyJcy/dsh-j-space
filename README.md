@@ -14,13 +14,13 @@ J-Space 本身由上游项目维护，这个仓库负责 DSH 适配。
 
 ## 安装
 
-1.2.5 的验证环境是 **DSH 0.2.1-rc.4 / Cordis 4.0.5**，另外在 `0.2.1-rc.3` 和 `0.2.2-alpha.2`（Cordis `4.0.6-alpha.1`）上验证过安装和预设加载。下面固定使用 rc.4 这个版本，不依赖 npm 标签的指向；`next` 标签现在也指向它，而 `latest` 仍是较早的 `0.2.1-rc.2`。更旧的 `0.2.0-rc.2` 缺少本预设需要的定时工具，不能完整加载，请先升级。
+1.2.6 已在 **DSH 0.2.2-rc.4 / Cordis 4.1.0** 上验证。请使用 **Node.js 24.9 或更新版本**。命令固定 DSH 版本，`next` 标签当前指向 `0.2.2-rc.4`，`latest` 仍指向 `0.2.2-rc.1`。
 
 ```bash
 # 已使用对应 DSH 版本时，可以跳过这一条
-npm install -g @deepseek-ai/dsh@0.2.1-rc.4
+npm install -g @deepseek-ai/dsh@0.2.2-rc.4
 
-dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.5
+dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.6
 ```
 
 已有 DSH 部署时，请在启动该部署的安装环境中升级，并先备份自定义配置。使用自定义 profile 的话，把 `web` 换成实际名称。
@@ -44,13 +44,7 @@ DSH 通过 [bundle 配置](<cordis.patch.yml>) 注册预设，技能直接读取
 
 ## 和官方智能体团队一起使用
 
-需要团队功能时，在同一个 profile 安装官方插件：
-
-```bash
-dsh plugin --profile web add @deepseek-ai/dsh-experimental-agent-team-profile@0.2.1-rc.4
-```
-
-创建成员、发消息、分配任务和管理成员生命周期，都交给官方插件。J-Space 预设不再单独注册 `subagent`、`fork` 和成员控制工具，也不会自动启用团队；只有用户明确要求时才创建团队。不装团队插件，也可以单智能体使用。
+DSH 0.2.2-rc.4 已内置智能体团队。在会话中开启团队开关，成员、消息和任务由 DSH 管理。只有用户明确要求时才创建团队成员，平时可以单智能体使用。
 
 原版 [orchestration 模块](<preset/skills/j-space/modules/orchestration.md>) 仍然保留。它记录参与者的工作和验收依据，不是另一套团队管理器：成员各自读取源文件、二次考量和独立验收的要求没有删除。控制器里的 `agent add` / `retire` 也只是记账，不会创建或停止 DSH 成员。
 
@@ -58,9 +52,9 @@ dsh plugin --profile web add @deepseek-ai/dsh-experimental-agent-team-profile@0.
 
 ## 从旧版升级
 
-在同一个 profile 更新包，重启 DSH Web，再新建会话。
+在同一个 profile 重新运行上面的安装命令并重启 DSH Web。已使用 J-Space 预设的会话可以直接重试。
 
-如果曾在 Web 编辑器中保存过 J-Space 的插件配置，请先备份，再重置该预设的覆盖配置，或手动移除旧的 `tool-subagent*`、Ralph 配置。否则，即使包已经更新，会话仍可能沿用旧的工具列表。官方团队层应放在 base / web 层之后加载。
+如果保存过自定义预设，请备份后从 persona 后缀中删除 `Your working directory is {{cwd}}.`，保留其余内容。DSH 会通过运行时上下文提供当前目录。若 profile 仍配置旧的 `@deepseek-ai/dsh-experimental-agent-team-profile`，升级到 0.2.2-rc.4 后可移除该条目。
 
 已有的 `.jspace/control.json` 和任务记录不用删除。
 
@@ -104,11 +98,11 @@ pnpm run test:upstream
 另行安装隔离的 DSH 宿主后，可以检查官方配置和真实安装流程：
 
 ```bash
-pnpm run test:host /path/to/isolated-host/node_modules 0.2.1-rc.4
-pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.1-rc.4
+pnpm run test:host /path/to/isolated-host/node_modules 0.2.2-rc.4
+pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.2-rc.4
 ```
 
-安装测试只创建新的临时 profile，不会修改正在使用的配置。1.2.5 已在 rc.3、rc.4 和 `0.2.2-alpha.2` 上验证原生安装、预设与技能加载，以及官方团队开关两种配置；没有做模型 A/B、真实团队对话、浏览器操作或定时投递测试。
+安装测试使用临时 profile，验证了原生安装、预设和技能加载、提示词渲染，以及 DSH 内置团队组件。
 
 ## 相关评测
 

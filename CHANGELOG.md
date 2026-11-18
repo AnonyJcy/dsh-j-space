@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.6 — 2026-11-18
+
+- Verify DSH `0.2.2-rc.4` with Cordis `4.1.0`. Document the pinned install and built-in Agent Team switch in both readmes.
+- Remove the legacy `{{cwd}}` persona suffix from both preset entry points. DSH supplies the current directory as runtime context.
+- Match the standard preset’s Office tool and file-tool configuration. Keep delegation with the DSH host and retain the scoped workflow engine.
+- Render the live scoped persona during the native installation smoke test to catch unsupported prompt variables.
+- Keep the canonical upstream SV1 snapshot and integrity hashes intact.
+
 ## 1.2.5 — 2026-10-28
 
 ### Compatibility

@@ -14,13 +14,13 @@ The upstream project maintains J-Space itself. This repository maintains the DSH
 
 ## Install
 
-Version 1.2.5 was tested with **DSH 0.2.1-rc.4 / Cordis 4.0.5**, and also installed and loaded on `0.2.1-rc.3` and `0.2.2-alpha.2` (Cordis `4.0.6-alpha.1`). The commands below pin rc.4 rather than relying on npm tags: the `next` tag now points at it, while `latest` is still the older `0.2.1-rc.2`. The much older `0.2.0-rc.2` is missing a required scheduling tool and cannot fully load this preset, so upgrade first if you use it.
+Version 1.2.6 was verified on **DSH 0.2.2-rc.4 / Cordis 4.1.0**. Use **Node.js 24.9 or later**. The commands pin the DSH version. The `next` tag currently points to `0.2.2-rc.4`, while `latest` points to `0.2.2-rc.1`.
 
 ```bash
 # Skip this if you already run the matching DSH version
-npm install -g @deepseek-ai/dsh@0.2.1-rc.4
+npm install -g @deepseek-ai/dsh@0.2.2-rc.4
 
-dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.5
+dsh plugin --profile web add @anonyjcy/dsh-j-space@1.2.6
 ```
 
 For an existing deployment, upgrade the installation that actually starts your DSH process and back up custom settings first. Replace `web` with your profile name if needed.
@@ -44,13 +44,7 @@ DSH registers the preset through the [bundle configuration](<cordis.patch.yml>) 
 
 ## Using Agent Teams
 
-To use teams, install the official plugin in the same profile:
-
-```bash
-dsh plugin --profile web add @deepseek-ai/dsh-experimental-agent-team-profile@0.2.1-rc.4
-```
-
-The official plugin handles members, messages, task assignments, and member lifecycle. The J-Space preset no longer registers its own `subagent`, `fork`, or member-control tools. It does not enable teams automatically: creating a team requires an explicit user request. You can also use J-Space with a single agent.
+DSH 0.2.2-rc.4 includes Agent Teams. Enable the Team switch in the session to use the built-in members, messages, and task board. Create teammates only when the user explicitly requests them. Single-agent sessions work with the same J-Space preset.
 
 The original [orchestration module](<preset/skills/j-space/modules/orchestration.md>) stays in place. It records work and review evidence, rather than managing a second team. Participants still need their own source reads, second consideration, and independent acceptance. The controller's `agent add` / `retire` commands record evidence roles; they do not create or stop DSH members.
 
@@ -58,9 +52,9 @@ The original [orchestration module](<preset/skills/j-space/modules/orchestration
 
 ## Updating from older releases
 
-Update the package in the same profile, restart DSH Web, and create a new session.
+Run the install command above in the same profile and restart DSH Web. Existing J-Space sessions can retry the affected turn.
 
-If you saved a custom J-Space plugin configuration in the Web editor, back it up and reset the preset override, or remove the old `tool-subagent*` and Ralph entries manually. Otherwise, sessions may still use the old tool list after the package is updated. Load the official Team layer after the base / web layers.
+If you saved a custom preset, back it up and remove `Your working directory is {{cwd}}.` from its persona suffix. DSH supplies the current directory through runtime context. Remove the older `@deepseek-ai/dsh-experimental-agent-team-profile` entry if it is still listed in your 0.2.2-rc.4 profile.
 
 Keep existing `.jspace/control.json` files and task records.
 
@@ -104,11 +98,11 @@ pnpm run test:upstream
 With a separately installed, isolated DSH host, you can also check the official configuration and native installation:
 
 ```bash
-pnpm run test:host /path/to/isolated-host/node_modules 0.2.1-rc.4
-pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.1-rc.4
+pnpm run test:host /path/to/isolated-host/node_modules 0.2.2-rc.4
+pnpm run test:install /path/to/isolated-host/node_modules /absolute/plugin.tgz 0.2.2-rc.4
 ```
 
-The installation smoke uses fresh temporary profiles and leaves your active configuration untouched. Version 1.2.5 was checked on rc.3, rc.4, and `0.2.2-alpha.2` for native installation, preset and skill loading, and Team OFF/ON configuration. Model A/B comparisons, actual Team conversations, browser interaction, and scheduled delivery were not tested.
+The smoke test uses a temporary profile and checks native installation, preset and skill loading, persona rendering, and built-in Agent Team components.
 
 ## Evaluation reports
 

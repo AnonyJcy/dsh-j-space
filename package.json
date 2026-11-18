@@ -1,7 +1,7 @@
 {
   "name": "@anonyjcy/dsh-j-space",
-  "version": "1.2.5",
-  "description": "J-Space Cognition Suite SV1 native Agent Preset and standalone plugin for DeepSeek Harness",
+  "version": "1.2.6",
+  "description": "J-Space Cognition Suite SV1 agent preset for DeepSeek Harness 0.2.2",
   "author": "anonyjcy",
   "license": "(MIT AND Apache-2.0)",
   "type": "module",
@@ -45,6 +45,7 @@
     "tools/upstream_integrity.py",
     "NOTICE.md",
     "cordis.patch.yml",
+    "CHANGELOG.md",
     "README.md",
     "README.en.md",
     "LICENSE"
@@ -63,7 +64,7 @@
     "@deepseek-ai/cordis": ">=4.0.2 <5 || ~4.0.5-alpha.1 || ~4.0.6-alpha.1"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "4.0.6-alpha.1",
+    "@deepseek-ai/cordis": "4.1.0",
     "@types/node": "^22.20.5",
     "typescript": "^5.8.0",
     "vitest": "^4.1.0",
